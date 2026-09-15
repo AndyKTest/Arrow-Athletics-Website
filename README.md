@@ -1,65 +1,98 @@
 # Arrow Athletics — Arrow Cup Website
 
-The website for **Arrow Cup**, a summer soccer league for girls' and boys' teams. Plain static HTML/CSS/JS — no build step required — hosted on GitHub Pages.
+The website for the **Arrow Cup**, a summer soccer league for high school boys' and girls' teams. Plain static HTML/CSS/JS — no build step needed to host it — served by GitHub Pages at **arrow-athletics.com**.
 
 ## Pages
 
-- `index.html` — Home
-- `about.html` — About the league
-- `programs.html` — Girls' and boys' league divisions, format, schedule
-- `photos.html` — Photo gallery (filterable, with a lightbox)
-- `blog.html` — Blog listing, plus three sample posts:
-  `blog-registration-open.html`, `blog-tryout-tips.html`, `blog-meet-the-coaches.html`
-- `contact.html` — Contact info + registration form
-- `404.html` — Custom not-found page
+| File | Page |
+|---|---|
+| `index.html` | Home |
+| `about.html` | About the league |
+| `programs.html` | Divisions (boys'/girls', varsity/JV) and season format |
+| `register.html` | Team registration form + FAQ |
+| `contact.html` | Contact details and general enquiry form |
+| `thanks.html` | Confirmation page shown after a form is submitted |
+| `photos.html` | Filterable photo gallery with lightbox |
+| `blog.html` | News index |
+| `blog-registration-open.html`, `blog-summer-prep.html`, `blog-coaches-guide.html` | Articles |
+| `404.html` | Custom not-found page |
 
-## Viewing it locally
+## How the forms work
 
-No build tools needed. From this folder, run a quick local server and open it in a browser:
+Both forms (registration and contact) post to **[FormSubmit](https://formsubmit.co)**, which emails each submission to `info@arrow-athletics.com`. No account, no server, no monthly fee.
 
-```bash
-python3 -m http.server 8000
-# then visit http://localhost:8000
-```
+**One-time activation:** the first time a form is submitted, FormSubmit emails `info@arrow-athletics.com` asking you to confirm the address. Click the link in that email once and every submission from then on is delivered automatically.
 
-## Publishing with GitHub Pages
+Two things worth knowing:
 
-1. Push this repo to GitHub (already done if you're reading this from the repo).
-2. In the repo, go to **Settings → Pages**.
-3. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
-4. Choose the `main` branch and the `/ (root)` folder, then save.
-5. GitHub will give you a URL like `https://<username>.github.io/Arrow-Athletics-Website/` within a minute or two.
+- The redirect after submitting points at `https://arrow-athletics.com/thanks.html`. If you ever change domains, update the `_next` hidden field in `register.html` and `contact.html` (it's marked with a comment).
+- The email address appears in the page source, which spam bots can scrape. If that becomes a problem, FormSubmit gives you a hashed endpoint after activation — swap the `action` URL for that and the address disappears from the HTML.
 
-## Things to swap in before launch
+To switch to a different provider (Formspree, Getform, Web3Forms), just change the `action` attribute on both forms.
 
-- **Photos**: everything in `images/gallery/` and `images/blog/` is a generated placeholder graphic. Replace those files (keep the same filenames, or update the `<img>` paths in the HTML) with real photos whenever you have them.
-- **Contact form**: `contact.html` currently points at a placeholder Formspree action (`https://formspree.io/f/your-form-id`). Create a free form at [formspree.io](https://formspree.io) (or any form backend) and swap in your real endpoint — GitHub Pages can't run server-side code, so a form needs an external service to actually receive submissions.
-- **Contact info**: the placeholder email (`info@arrowathletics.example`) and phone number in `contact.html` and the footer should be replaced with real details.
-- **Social links**: the Instagram/Facebook/X icons in the footer and contact page currently link to `#` — update the `href`s once your accounts exist.
-- **Colors/dates**: division dates, season length, and the "Summer 2026" references are placeholders — adjust in the relevant page (or in `dev-tools/build.py`, see below, if you'd rather regenerate).
+## Swapping in real photos
+
+Every image in `images/gallery/` and `images/blog/` is a generated brand graphic standing in for real photography. To replace one, **save your photo over the existing file using the same filename** — no code changes needed.
+
+| Files | Used for | Best size |
+|---|---|---|
+| `images/gallery/gallery-1.jpg` … `gallery-8.jpg` | Photo gallery + home page | 1000 × 750 (4:3) |
+| `images/blog/blog-1.jpg` … `blog-3.jpg` | Article headers and cards | 1000 × 560 (16:9) |
+| `images/hero.jpg` | Home page hero background | 1920 × 1080 |
+| `images/about.jpg` | About page and home page | 1200 × 800 |
+
+Gallery captions live in `dev-tools/build.py` (`GALLERY_ITEMS`) if you want to retitle them.
+
+Free, commercially-usable stock photography: [Unsplash](https://unsplash.com), [Pexels](https://pexels.com), [Pixabay](https://pixabay.com). Search "high school soccer", "youth soccer match", "soccer pitch". All three allow commercial use without attribution — but real photos of your own teams will always beat stock.
+
+## Logo and colours
+
+The palette is taken straight from the logo: navy `#011B46` and electric blue `#0059FC`. Both are defined once at the top of `css/style.css` as CSS variables, so changing them there updates the whole site.
+
+Logo files in `images/`:
+
+- `logo.png` — full colour, for light backgrounds
+- `logo-white.png` — white knockout, used in the header and footer
+- `mark.png` / `mark-white.png` — arrow mark on its own
+- `favicon.png`, `apple-touch-icon.png` — browser tab and phone home-screen icons
 
 ## Editing the site
 
-You can edit any `.html` file directly — it's plain markup, no templating magic at runtime.
+Any `.html` file can be edited directly — it's plain markup.
 
-If you'd rather make broader changes (e.g. updating the nav on every page at once, or changing copy across the site), the `dev-tools/` folder has the Python scripts originally used to generate these pages:
+For changes that affect every page (navigation, footer, contact details, season dates), edit `dev-tools/build.py` instead and re-run it, which regenerates all the HTML from shared templates:
 
-- `dev-tools/build.py` — regenerates all HTML pages from shared header/footer/nav templates. Edit the content or templates inside, then run:
-  ```bash
-  python3 dev-tools/build.py
-  ```
-  from the repo root (it writes the `.html` files back into the root folder).
-- `dev-tools/generate_images.py` — regenerates the placeholder gradient images in `images/`. Not needed once you've swapped in real photos.
+```bash
+python3 dev-tools/build.py
+```
 
-Neither script is required for the site to work — they're just a convenience for making sweeping edits later.
+Key values are constants at the top of that file: `SEASON`, `EMAIL`, `PHONE_DISPLAY`, `DOMAIN`, `FORM_ENDPOINT`.
+
+Other scripts in `dev-tools/` (not needed to run the site):
+
+- `process_logo.py` — regenerates the logo variants and favicon from the source artwork
+- `generate_images.py` — regenerates the placeholder brand graphics
+- `shot.py` — renders screenshots of every page for review
+
+## Viewing it locally
+
+```bash
+python3 -m http.server 8000
+# then open http://localhost:8000
+```
+
+## Hosting notes
+
+- `CNAME` (created by GitHub when the custom domain was set) must stay in the repo, or the custom domain stops working.
+- `.nojekyll` tells GitHub Pages to serve files as-is rather than running them through Jekyll.
+- Fonts (Saira and Inter) load from Google Fonts.
 
 ## Structure
 
 ```
-├── index.html, about.html, programs.html, photos.html, blog.html, contact.html, 404.html
-├── blog-*.html          # individual blog posts
-├── css/style.css        # all site styles
-├── js/main.js           # nav toggle, gallery filter + lightbox, form handling
-├── images/              # hero, about, gallery, and blog images (placeholders for now)
-└── dev-tools/           # optional scripts used to generate the pages/images above
+├── *.html                 # every page
+├── css/style.css          # all styling, brand colours defined at the top
+├── js/main.js             # mobile nav, gallery filter, lightbox
+├── images/                # logo variants, favicon, hero, gallery, blog art
+└── dev-tools/             # optional scripts for regenerating pages and assets
 ```

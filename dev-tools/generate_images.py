@@ -1,114 +1,188 @@
 #!/usr/bin/env python3
-"""Generate placeholder brand imagery for the Arrow Cup site.
-These are stand-ins so the site looks finished; swap in real photos later."""
+"""Generate the site's brand imagery: angular sports-graphic panels built from the
+Arrow Athletics logo palette and its speed-shard motif.
+
+These are designed to look like intentional brand art, not 'missing photo' boxes,
+so the site looks finished until real match photography is dropped in.
+Replace any file in images/gallery/ or images/blog/ with a real photo of the same
+name and the site picks it up with no code changes."""
 import math
+import os
 import random
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter
 
-random.seed(42)
+OUT = "images"
+os.makedirs(f"{OUT}/gallery", exist_ok=True)
+os.makedirs(f"{OUT}/blog", exist_ok=True)
 
-NAVY = (13, 27, 58)
-NAVY_DARK = (8, 17, 38)
-ORANGE = (245, 98, 46)
-ORANGE_LIGHT = (255, 138, 76)
-PINK = (224, 65, 123)
-BLUE = (46, 134, 245)
+NAVY_DEEP = (2, 13, 38)
+NAVY = (1, 27, 70)
+NAVY_MID = (6, 40, 99)
+BLUE = (0, 89, 252)
+BLUE_LIFT = (77, 143, 255)
 WHITE = (255, 255, 255)
-CREAM = (250, 247, 240)
+
+SS = 2  # supersample factor
+
 
 def lerp(a, b, t):
     return tuple(int(a[i] + (b[i] - a[i]) * t) for i in range(3))
 
-def diagonal_gradient(w, h, c1, c2, angle_bias=1.0):
-    img = Image.new("RGB", (w, h), c1)
-    px = img.load()
-    for y in range(h):
-        for x in range(0, w, 2):
-            t = ((x / w) * 0.5 + (y / h) * 0.5) ** angle_bias
-            color = lerp(c1, c2, t)
-            px[x, y] = color
-            if x + 1 < w:
-                px[x + 1, y] = color
-    return img
 
-def add_ball_pattern(img, count, seed_offset=0):
-    draw = ImageDraw.Draw(img, "RGBA")
-    w, h = img.size
-    rnd = random.Random(seed_offset)
-    for _ in range(count):
-        r = rnd.randint(18, 60)
-        x = rnd.randint(-r, w + r)
-        y = rnd.randint(-r, h + r)
-        alpha = rnd.randint(10, 26)
-        draw.ellipse([x - r, y - r, x + r, y + r], outline=(255, 255, 255, alpha), width=3)
-    return img
+def base_gradient(w, h, c1, c2, diagonal=True):
+    """Smooth two-tone base, drawn small then scaled up (fast + band-free)."""
+    small = Image.new("RGB", (64, 64))
+    px = small.load()
+    for y in range(64):
+        for x in range(64):
+            t = ((x / 63) * 0.55 + (y / 63) * 0.45) if diagonal else (y / 63)
+            px[x, y] = lerp(c1, c2, t)
+    return small.resize((w, h), Image.BICUBIC)
 
-def get_font(size, bold=True):
-    paths = [
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf" if bold else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-    ]
-    for p in paths:
-        try:
-            return ImageFont.truetype(p, size)
-        except Exception:
-            continue
-    return ImageFont.load_default()
 
-def caption_card(w, h, c1, c2, title, subtitle, tag, tag_color, outpath, angle_bias=1.0, seed=0):
-    # Clean gradient background only — no baked-in text/chip, since every
-    # page already overlays its own tag + caption in HTML. Baking text in
-    # here caused duplicated/cropped captions once object-fit:cover cropped
-    # these images to a different aspect ratio per placement.
-    img = diagonal_gradient(w, h, c1, c2, angle_bias)
-    img = add_ball_pattern(img, 14, seed)
-    img = img.filter(ImageFilter.GaussianBlur(0.4))
+def shard(draw, x, y, length, width, angle_deg, color):
+    """A long, thin triangle — the speed-streak shape from the logo."""
+    a = math.radians(angle_deg)
+    dx, dy = math.cos(a), math.sin(a)
+    px_, py_ = -dy, dx
+    tip = (x + dx * length, y + dy * length)
+    b1 = (x + px_ * width / 2, y + py_ * width / 2)
+    b2 = (x - px_ * width / 2, y - py_ * width / 2)
+    draw.polygon([b1, tip, b2], fill=color)
 
-    # subtle bottom scrim so any future overlay text stays legible
-    scrim_h = int(h * 0.35)
-    scrim = Image.new("RGBA", (w, scrim_h), (0, 0, 0, 0))
-    sdraw = ImageDraw.Draw(scrim)
-    for i in range(scrim_h):
-        a = int(90 * (i / scrim_h))
-        sdraw.line([(0, i), (w, i)], fill=(6, 12, 26, a))
-    img.paste(scrim, (0, h - scrim_h), scrim)
 
-    img.convert("RGB").save(outpath, quality=88)
-    print("wrote", outpath)
+def shard_field(layer, w, h, seed, density=7, hue=BLUE, angle=-24):
+    d = ImageDraw.Draw(layer, "RGBA")
+    rnd = random.Random(seed)
+    for _ in range(density):
+        L = rnd.randint(int(w * 0.35), int(w * 0.95))
+        W = rnd.randint(int(h * 0.02), int(h * 0.10))
+        x = rnd.randint(int(-w * 0.15), int(w * 0.75))
+        y = rnd.randint(int(h * 0.05), int(h * 0.95))
+        a = rnd.uniform(0, 1)
+        col = hue + (rnd.randint(28, 80),) if a > 0.32 else WHITE + (rnd.randint(14, 30),)
+        shard(d, x, y, L, W, angle + rnd.uniform(-5, 5), col)
 
-# ---- Gallery images (800x600) ----
-gallery_specs = [
-    ("gallery-1.jpg", NAVY, ORANGE, "Opening Whistle", "Arrow Cup Kickoff Weekend", "ARROW CUP", ORANGE, 1.0, 1),
-    ("gallery-2.jpg", (120, 20, 60), PINK, "Girls U14 Final", "Championship Saturday", "GIRLS", PINK, 0.8, 2),
-    ("gallery-3.jpg", NAVY_DARK, BLUE, "Boys U12 Match Day", "Group Stage, Field 3", "BOYS", BLUE, 1.2, 3),
-    ("gallery-4.jpg", (30, 60, 40), (90, 200, 130), "Skills Clinic", "Summer Training Camp", "TRAINING", (60, 160, 100), 0.9, 4),
-    ("gallery-5.jpg", (90, 20, 90), PINK, "Girls U16 Semifinal", "Under the Lights", "GIRLS", PINK, 1.1, 5),
-    ("gallery-6.jpg", NAVY, BLUE, "Boys U10 Kickoff", "First Goals of the Season", "BOYS", BLUE, 0.85, 6),
-    ("gallery-7.jpg", (120, 60, 10), ORANGE_LIGHT, "Team Huddle", "Pregame Traditions", "ARROW CUP", ORANGE, 1.0, 7),
-    ("gallery-8.jpg", NAVY_DARK, (150, 60, 160), "Trophy Presentation", "Closing Ceremony", "ARROW CUP", (150, 60, 160), 0.95, 8),
+
+def pitch_lines(layer, w, h, alpha=22):
+    """Soccer pitch geometry as faint line work."""
+    d = ImageDraw.Draw(layer, "RGBA")
+    col = WHITE + (alpha,)
+    lw = max(2, int(h * 0.006))
+    cx, cy = int(w * 0.5), int(h * 0.5)
+    r = int(h * 0.30)
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], outline=col, width=lw)
+    d.line([(cx, 0), (cx, h)], fill=col, width=lw)
+    d.ellipse([cx - lw * 2, cy - lw * 2, cx + lw * 2, cy + lw * 2], fill=col)
+    bw, bh = int(w * 0.16), int(h * 0.46)
+    d.rectangle([0, cy - bh // 2, bw, cy + bh // 2], outline=col, width=lw)
+    d.rectangle([w - bw, cy - bh // 2, w, cy + bh // 2], outline=col, width=lw)
+    ar = int(h * 0.10)
+    d.arc([-ar, -ar, ar, ar], 0, 90, fill=col, width=lw)
+    d.arc([w - ar, h - ar, w + ar, h + ar], 180, 270, fill=col, width=lw)
+
+
+def halftone(layer, w, h, seed, alpha_max=46, hue=BLUE):
+    d = ImageDraw.Draw(layer, "RGBA")
+    step = max(12, int(h / 26))
+    for gy in range(0, h + step, step):
+        for gx in range(0, w + step, step):
+            t = 1 - (gx / w * 0.65 + gy / h * 0.35)
+            if t <= 0.02:
+                continue
+            rad = step * 0.42 * t
+            if rad < 0.7:
+                continue
+            a = int(alpha_max * t)
+            d.ellipse([gx - rad, gy - rad, gx + rad, gy + rad], fill=hue + (a,))
+
+
+def net_mesh(layer, w, h, alpha=20):
+    d = ImageDraw.Draw(layer, "RGBA")
+    col = WHITE + (alpha,)
+    step = max(18, int(h / 16))
+    for i in range(-h, w + h, step):
+        d.line([(i, 0), (i + h, h)], fill=col, width=2)
+        d.line([(i, h), (i + h, 0)], fill=col, width=2)
+
+
+def mark_watermark(canvas, w, h, scale=0.85, pos="right", alpha=34):
+    """The arrow mark itself, oversized and faded, bleeding off an edge."""
+    path = f"{OUT}/mark-white.png"
+    if not os.path.exists(path):
+        return
+    m = Image.open(path).convert("RGBA")
+    tw = int(w * scale)
+    th = max(1, round(m.height * tw / m.width))
+    m = m.resize((tw, th), Image.LANCZOS)
+    a = m.getchannel("A").point(lambda v: int(v * alpha / 255))
+    m.putalpha(a)
+    x = int(w * 0.30) if pos == "right" else int(-w * 0.12)
+    canvas.alpha_composite(m, (x, (h - th) // 2))
+
+
+def vignette(canvas, w, h, strength=90):
+    v = Image.new("L", (w, h), 0)
+    d = ImageDraw.Draw(v)
+    d.ellipse([-w * 0.35, -h * 0.5, w * 1.35, h * 1.5], fill=strength)
+    v = v.filter(ImageFilter.GaussianBlur(int(min(w, h) * 0.12)))
+    dark = Image.new("RGBA", (w, h), NAVY_DEEP + (255,))
+    inv = v.point(lambda p: 255 - p)
+    dark.putalpha(inv.point(lambda p: int(p * 0.55)))
+    canvas.alpha_composite(dark)
+
+
+def build(style, w, h, seed, out, flip=False):
+    W, H = w * SS, h * SS
+    if style in ("blue", "blue-mark"):
+        base = base_gradient(W, H, NAVY, BLUE)
+    elif style == "deep":
+        base = base_gradient(W, H, NAVY_DEEP, NAVY_MID)
+    else:
+        base = base_gradient(W, H, NAVY_DEEP, NAVY)
+    canvas = base.convert("RGBA")
+
+    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    if style in ("pitch", "deep"):
+        pitch_lines(layer, W, H, alpha=26)
+    if style == "halftone":
+        halftone(layer, W, H, seed, hue=BLUE_LIFT)
+    if style == "mesh":
+        net_mesh(layer, W, H, alpha=18)
+    canvas.alpha_composite(layer)
+
+    if style in ("mark", "blue-mark"):
+        mark_watermark(canvas, W, H, scale=0.95, pos="right", alpha=40)
+
+    shards = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    shard_field(shards, W, H, seed, density=8 if style != "mesh" else 5,
+                hue=BLUE_LIFT if style in ("deep", "pitch") else BLUE)
+    canvas.alpha_composite(shards)
+
+    vignette(canvas, W, H)
+
+    img = canvas.convert("RGB").resize((w, h), Image.LANCZOS)
+    if flip:
+        img = img.transpose(Image.FLIP_LEFT_RIGHT)
+    img.save(out, quality=90, optimize=True)
+    print("wrote", out)
+
+
+# ---- Hero + section imagery ----
+build("blue-mark", 1920, 1080, 1, f"{OUT}/hero.jpg")
+build("pitch", 1200, 800, 2, f"{OUT}/about.jpg")
+
+# ---- Gallery: eight distinct compositions ----
+gallery = [
+    ("mark", 11, False), ("pitch", 12, False), ("blue", 13, True), ("halftone", 14, False),
+    ("deep", 15, True), ("mesh", 16, False), ("blue-mark", 17, False), ("pitch", 18, True),
 ]
-for fname, c1, c2, title, sub, tag, tagc, ab, seed in gallery_specs:
-    caption_card(800, 600, c1, c2, title, sub, tag, tagc, f"images/gallery/{fname}", ab, seed)
+for i, (style, seed, flip) in enumerate(gallery, start=1):
+    build(style, 1000, 750, seed, f"{OUT}/gallery/gallery-{i}.jpg", flip)
 
-# ---- Blog thumbnails (900x520) ----
-blog_specs = [
-    ("blog-1.jpg", NAVY, ORANGE, "Registration Is Open", "2026 Arrow Cup Season", "NEWS", ORANGE, 1.0, 11),
-    ("blog-2.jpg", (90, 20, 90), PINK, "5 Tips Before Tryouts", "Girls & Boys Divisions", "TIPS", PINK, 0.9, 12),
-    ("blog-3.jpg", NAVY_DARK, BLUE, "Meet the Coaches", "Building Our 2026 Staff", "COMMUNITY", BLUE, 1.1, 13),
-]
-for fname, c1, c2, title, sub, tag, tagc, ab, seed in blog_specs:
-    caption_card(900, 520, c1, c2, title, sub, tag, tagc, f"images/blog/{fname}", ab, seed)
-
-# ---- Hero image (1600x900) ----
-hero = diagonal_gradient(1600, 900, NAVY_DARK, NAVY, 1.0)
-hero = add_ball_pattern(hero, 40, 99)
-hero.save("images/hero.jpg", quality=90)
-print("wrote images/hero.jpg")
-
-# ---- About page image (1200x800) ----
-about_img = diagonal_gradient(1200, 800, (20, 40, 80), ORANGE, 0.9)
-about_img = add_ball_pattern(about_img, 24, 55)
-about_img.save("images/about.jpg", quality=88)
-print("wrote images/about.jpg")
+# ---- Blog thumbnails ----
+blogs = [("blue", 21, False), ("halftone", 22, True), ("deep", 23, False)]
+for i, (style, seed, flip) in enumerate(blogs, start=1):
+    build(style, 1000, 560, seed, f"{OUT}/blog/blog-{i}.jpg", flip)
 
 print("done")

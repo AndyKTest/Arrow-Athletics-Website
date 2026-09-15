@@ -3,95 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Photo Gallery | Arrow Athletics</title>
-<meta name="description" content="Photos from Arrow Cup &mdash; girls' and boys' league games, training, and championship weekend.">
-<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<title>Photos | Arrow Athletics</title>
+<meta name="description" content="Photos from the Arrow Cup — boys' and girls' high school matches, matchdays, and championship weekend.">
+<link rel="icon" href="images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
-<meta property="og:title" content="Photo Gallery | Arrow Athletics">
-<meta property="og:description" content="Photos from Arrow Cup &mdash; girls' and boys' league games, training, and championship weekend.">
+<meta property="og:title" content="Photos | Arrow Athletics">
+<meta property="og:description" content="Photos from the Arrow Cup — boys' and girls' high school matches, matchdays, and championship weekend.">
+<meta property="og:image" content="https://arrow-athletics.com/images/logo.png">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#011B46">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="nav-wrap">
-    <a href="index.html" class="brand">
-      <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-<rect width="48" height="48" rx="12" fill="#F5622E"/>
-<path d="M14 30L24 16L34 30" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M24 16V33" stroke="white" stroke-width="4" stroke-linecap="round"/>
-</svg>
-      <span>ARROW ATHLETICS<small>Arrow Cup &middot; Summer Soccer League</small></span>
+    <a href="index.html" class="brand" aria-label="Arrow Athletics home">
+      <img src="images/logo-white.png" alt="Arrow Athletics" class="brand-logo">
     </a>
-    <ul class="nav-links">
+    <nav>
+      <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="programs.html">Programs</a></li>
+        <li><a href="programs.html">Divisions</a></li>
         <li><a href="photos.html" class="active">Photos</a></li>
-        <li><a href="blog.html">Blog</a></li>
+        <li><a href="blog.html">News</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <li class="nav-cta"><a href="contact.html" class="btn btn-primary btn-sm">Register Interest</a></li>
-    </ul>
+        <li class="nav-cta"><a href="register.html" class="btn btn-primary btn-sm">Register a Team</a></li>
+      </ul>
+    </nav>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
+<main id="main">
 
 <section class="page-hero">
   <div class="container">
-    <div class="breadcrumb">Gallery</div>
-    <h1>Moments from the Pitch</h1>
-    <p>Game days, training sessions, and championship weekend &mdash; captured across the Arrow Cup season.</p>
+    <p class="breadcrumb">Gallery</p>
+    <h1>Around the League</h1>
+    <p>Matchdays, league fixtures, and championship weekend across the boys' and girls' divisions.</p>
   </div>
 </section>
 
 <section>
   <div class="container">
     <div class="filter-bar">
-      <button class="filter-btn active" data-filter="all">All Photos</button>
-      <button class="filter-btn" data-filter="girls">Girls League</button>
-      <button class="filter-btn" data-filter="boys">Boys League</button>
-      <button class="filter-btn" data-filter="training">Training</button>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="boys">Boys</button>
+      <button class="filter-btn" data-filter="girls">Girls</button>
+      <button class="filter-btn" data-filter="matchday">Matchday</button>
+      <button class="filter-btn" data-filter="championship">Championship</button>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item" data-category="all">
-      <img src="images/gallery/gallery-1.jpg" alt="Arrow Cup Kickoff Weekend">
-      <span class="tag tag-cup" style="position:absolute; top:14px; left:14px;">Arrow Cup</span>
-      <div class="gallery-cap">Arrow Cup Kickoff Weekend</div>
-    </div><div class="gallery-item" data-category="girls">
-      <img src="images/gallery/gallery-2.jpg" alt="Girls U14 Final &mdash; Championship Saturday">
-      <span class="tag tag-girls" style="position:absolute; top:14px; left:14px;">Girls</span>
-      <div class="gallery-cap">Girls U14 Final &mdash; Championship Saturday</div>
-    </div><div class="gallery-item" data-category="boys">
-      <img src="images/gallery/gallery-3.jpg" alt="Boys U12 Match Day &mdash; Group Stage">
-      <span class="tag tag-boys" style="position:absolute; top:14px; left:14px;">Boys</span>
-      <div class="gallery-cap">Boys U12 Match Day &mdash; Group Stage</div>
-    </div><div class="gallery-item" data-category="training">
-      <img src="images/gallery/gallery-4.jpg" alt="Summer Skills Clinic">
-      <span class="tag tag-training" style="position:absolute; top:14px; left:14px;">Training</span>
-      <div class="gallery-cap">Summer Skills Clinic</div>
-    </div><div class="gallery-item" data-category="girls">
-      <img src="images/gallery/gallery-5.jpg" alt="Girls U16 Semifinal, Under the Lights">
-      <span class="tag tag-girls" style="position:absolute; top:14px; left:14px;">Girls</span>
-      <div class="gallery-cap">Girls U16 Semifinal, Under the Lights</div>
-    </div><div class="gallery-item" data-category="boys">
-      <img src="images/gallery/gallery-6.jpg" alt="Boys U10 Kickoff &mdash; First Goals">
-      <span class="tag tag-boys" style="position:absolute; top:14px; left:14px;">Boys</span>
-      <div class="gallery-cap">Boys U10 Kickoff &mdash; First Goals</div>
-    </div><div class="gallery-item" data-category="all">
-      <img src="images/gallery/gallery-7.jpg" alt="Team Huddle Before Kickoff">
-      <span class="tag tag-cup" style="position:absolute; top:14px; left:14px;">Arrow Cup</span>
-      <div class="gallery-cap">Team Huddle Before Kickoff</div>
-    </div><div class="gallery-item" data-category="all">
-      <img src="images/gallery/gallery-8.jpg" alt="Trophy Presentation &mdash; Closing Ceremony">
-      <span class="tag tag-cup" style="position:absolute; top:14px; left:14px;">Arrow Cup</span>
-      <div class="gallery-cap">Trophy Presentation &mdash; Closing Ceremony</div>
+      <figure class="gallery-item" data-category="boys">
+      <img src="images/gallery/gallery-1.jpg" alt="Boys Varsity &mdash; opening week" loading="lazy">
+      <span class="tag tag-boys">Boys</span>
+      <figcaption class="gallery-cap">Boys Varsity &mdash; opening week</figcaption>
+    </figure><figure class="gallery-item" data-category="matchday">
+      <img src="images/gallery/gallery-2.jpg" alt="Warmups before kickoff" loading="lazy">
+      <span class="tag tag-cup">Matchday</span>
+      <figcaption class="gallery-cap">Warmups before kickoff</figcaption>
+    </figure><figure class="gallery-item" data-category="girls">
+      <img src="images/gallery/gallery-3.jpg" alt="Girls Varsity &mdash; league play" loading="lazy">
+      <span class="tag tag-girls">Girls</span>
+      <figcaption class="gallery-cap">Girls Varsity &mdash; league play</figcaption>
+    </figure><figure class="gallery-item" data-category="matchday">
+      <img src="images/gallery/gallery-4.jpg" alt="Sideline view, midweek fixture" loading="lazy">
+      <span class="tag tag-cup">Matchday</span>
+      <figcaption class="gallery-cap">Sideline view, midweek fixture</figcaption>
+    </figure><figure class="gallery-item" data-category="girls">
+      <img src="images/gallery/gallery-5.jpg" alt="Girls JV &mdash; Saturday fixtures" loading="lazy">
+      <span class="tag tag-girls">Girls</span>
+      <figcaption class="gallery-cap">Girls JV &mdash; Saturday fixtures</figcaption>
+    </figure><figure class="gallery-item" data-category="boys">
+      <img src="images/gallery/gallery-6.jpg" alt="Boys JV &mdash; second half" loading="lazy">
+      <span class="tag tag-boys">Boys</span>
+      <figcaption class="gallery-cap">Boys JV &mdash; second half</figcaption>
+    </figure><figure class="gallery-item" data-category="championship">
+      <img src="images/gallery/gallery-7.jpg" alt="Championship weekend" loading="lazy">
+      <span class="tag tag-cup">Championship</span>
+      <figcaption class="gallery-cap">Championship weekend</figcaption>
+    </figure><figure class="gallery-item" data-category="championship">
+      <img src="images/gallery/gallery-8.jpg" alt="Trophy presentation" loading="lazy">
+      <span class="tag tag-cup">Championship</span>
+      <figcaption class="gallery-cap">Trophy presentation</figcaption>
+    </figure>
     </div>
-    </div>
-    <p class="center" style="margin-top:32px; font-size:0.9rem;">Placeholder images shown above &mdash; swap in real photos any time by replacing the files in <code>images/gallery/</code>.</p>
+    <p class="center fine-print">Season photography coming as the summer gets underway &mdash; the graphics above are placeholders.</p>
   </div>
 </section>
 <div class="lightbox">
@@ -101,19 +104,13 @@
   <button class="lightbox-nav lightbox-next" aria-label="Next">&#8250;</button>
 </div>
 
+</main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="footer-brand">
-          <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-<rect width="48" height="48" rx="12" fill="#F5622E"/>
-<path d="M14 30L24 16L34 30" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M24 16V33" stroke="white" stroke-width="4" stroke-linecap="round"/>
-</svg>
-          <span>ARROW ATHLETICS</span>
-        </div>
-        <p>Arrow Cup is a summer soccer league for girls and boys, built around real competition, real community, and a championship weekend every team remembers. More sports joining in future seasons.</p>
+        <img src="images/logo-white.png" alt="Arrow Athletics" class="footer-logo">
+        <p>Arrow Cup is a summer 2026 soccer league for high school boys' and girls' teams &mdash; real divisions, real officiating, and a championship weekend to finish the summer.</p>
         <div class="social-row">
           <a href="#" aria-label="Instagram" title="Instagram">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
@@ -121,25 +118,25 @@
           <a href="#" aria-label="Facebook" title="Facebook">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 8.5h2V5h-2c-2.2 0-4 1.8-4 4v2H9v3.5h2V21h3.5v-6.5H17l.5-3.5h-3V9c0-.6.4-1 1-1z" fill="currentColor"/></svg>
           </a>
-          <a href="#" aria-label="X / Twitter" title="X / Twitter">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <a href="mailto:info@arrow-athletics.com" aria-label="Email us" title="Email us">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M4 6.5l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
           </a>
         </div>
       </div>
       <div>
-        <h4>Explore</h4>
+        <h4>League</h4>
         <ul>
           <li><a href="about.html">About the League</a></li>
-          <li><a href="programs.html">Girls &amp; Boys Programs</a></li>
+          <li><a href="programs.html">Divisions &amp; Format</a></li>
           <li><a href="photos.html">Photo Gallery</a></li>
-          <li><a href="blog.html">Blog &amp; News</a></li>
+          <li><a href="blog.html">News &amp; Updates</a></li>
         </ul>
       </div>
       <div>
         <h4>Get Involved</h4>
         <ul>
-          <li><a href="contact.html">Register a Team</a></li>
-          <li><a href="contact.html">Volunteer / Coach</a></li>
+          <li><a href="register.html">Register a Team</a></li>
+          <li><a href="contact.html">Coach &amp; Referee Inquiries</a></li>
           <li><a href="contact.html">Sponsor the Cup</a></li>
           <li><a href="contact.html">General Questions</a></li>
         </ul>
@@ -147,14 +144,15 @@
       <div>
         <h4>Contact</h4>
         <ul>
-          <li><a href="mailto:info@arrowathletics.example">info@arrowathletics.example</a></li>
-          <li><span>Summer League &middot; 2026</span></li>
+          <li><a href="mailto:info@arrow-athletics.com">info@arrow-athletics.com</a></li>
+          <li><a href="tel:+17742709555">+1 (774) 270-9555</a></li>
+          <li><span>Summer 2026 &middot; Registration open</span></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>&copy; <span data-year>2026</span> Arrow Athletics. All rights reserved.</span>
-      <span>Built for the Arrow Cup summer soccer league.</span>
+      <span>High school boys' &amp; girls' summer soccer.</span>
     </div>
   </div>
 </footer>
