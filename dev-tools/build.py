@@ -362,9 +362,9 @@ def page_about():
       <div>
         <p class="eyebrow">Our Story</p>
         <h2>Why we started the {CUP_NAME}</h2>
-        <p>High school soccer is short. A season ends in the fall, and then months go by before the next competitive match. Club soccer fills that gap for some players, but plenty of athletes &mdash; especially those who play for their school and not a club &mdash; end up with nowhere structured to play.</p>
-        <p>{SITE_NAME} started with one goal: build a summer league that treats high school soccer seriously. Real schedules. Real officials. Standings that matter and a championship weekend that feels like one. Boys' and girls' divisions, varsity and JV, all running the same summer.</p>
-        <p>It's soccer, it's high school, and that's the whole focus &mdash; no age groups to age out of, no watered-down format.</p>
+        <p>My brother and I started {SITE_NAME} because, like a lot of the players who'll fill these divisions, we loved playing for our high school team &mdash; and we missed it the second the fall season ended. We both went on to play in college, and we watched plenty of teammates go the club route too. That's real competition, and we don't take anything away from it. But none of it replaces playing for your school, with your own classmates on the sideline cheering you on. Nothing really does.</p>
+        <p>So we built the league we wished had existed: a summer season where high school players keep playing as a team, with real divisions, real officiating, and standings that actually matter &mdash; not a pickup run to kill time before preseason.</p>
+        <p>This summer starts local, but that's just the start. The plan is for the {CUP_NAME} to grow into a statewide cup, and eventually a New England&ndash;wide one &mdash; teams playing through the season in pools, then meeting at the end of summer for the {CUP_NAME} tournament, where the top teams from each pool play each other for the title. We're excited to be part of a bigger movement: bringing together high school teams that have never had a reason, or a chance, to play each other before.</p>
       </div>
     </div>
   </div>
@@ -453,6 +453,7 @@ def page_programs():
         <a href="register.html" class="btn btn-primary btn-sm">Register a Boys' Team</a>
       </div>
       <p>Varsity and JV brackets for boys in grades 9&ndash;12. Teams may enter as a school squad or as a combined roster of high school players from the same area.</p>
+      <div class="league-photo"><img src="images/gallery/gallery-4.jpg" alt="Boys high school soccer action" loading="lazy"></div>
       {division_table([
           ("Boys Varsity", "Grades 9&ndash;12", "11v11, full pitch, two 40-minute halves"),
           ("Boys JV", "Grades 9&ndash;11", "11v11, full pitch, two 35-minute halves"),
@@ -468,6 +469,7 @@ def page_programs():
         <a href="register.html" class="btn btn-primary btn-sm">Register a Girls' Team</a>
       </div>
       <p>The same structure for girls' teams &mdash; varsity and JV brackets, weekly matches, and a place in the championship bracket at the end of the summer.</p>
+      <div class="league-photo"><img src="images/gallery/gallery-5.jpg" alt="Girls high school soccer action" loading="lazy"></div>
       {division_table([
           ("Girls Varsity", "Grades 9&ndash;12", "11v11, full pitch, two 40-minute halves"),
           ("Girls JV", "Grades 9&ndash;11", "11v11, full pitch, two 35-minute halves"),
@@ -679,14 +681,18 @@ write("thanks.html", page_thanks())
 # PHOTOS
 # =========================================================
 GALLERY_ITEMS = [
-    (1, "boys", "boys", "Boys", "Boys Varsity &mdash; opening week"),
-    (2, "matchday", "cup", "Matchday", "Warmups before kickoff"),
-    (3, "girls", "girls", "Girls", "Girls Varsity &mdash; league play"),
-    (4, "matchday", "cup", "Matchday", "Sideline view, midweek fixture"),
-    (5, "girls", "girls", "Girls", "Girls JV &mdash; Saturday fixtures"),
-    (6, "boys", "boys", "Boys", "Boys JV &mdash; second half"),
-    (7, "championship", "cup", "Championship", "Championship weekend"),
-    (8, "championship", "cup", "Championship", "Trophy presentation"),
+    (1, "boys", "boys", "Boys", "Lining up a shot on goal"),
+    (2, "boys", "boys", "Boys", "Team huddle before kickoff"),
+    (3, "girls", "girls", "Girls", "Girls' soccer in full stride"),
+    (4, "boys", "boys", "Boys", "Racing for the ball down the wing"),
+    (5, "girls", "girls", "Girls", "A throw-in from the sideline"),
+    (6, "boys", "boys", "Boys", "A squad ready for the season"),
+    (7, "boys", "boys", "Boys", "Striking a first-time shot"),
+    (8, "matchday", "cup", "Matchday", "Ready for kickoff"),
+    (9, "matchday", "cup", "Matchday", "A hard-fought challenge at midfield"),
+    (10, "matchday", "cup", "Matchday", "Chasing the game in open space"),
+    (11, "boys", "boys", "Boys", "Team talk before the whistle"),
+    (12, "matchday", "cup", "Matchday", "Wide open play across the pitch"),
 ]
 
 
@@ -717,12 +723,11 @@ def page_photos():
       <button class="filter-btn" data-filter="boys">Boys</button>
       <button class="filter-btn" data-filter="girls">Girls</button>
       <button class="filter-btn" data-filter="matchday">Matchday</button>
-      <button class="filter-btn" data-filter="championship">Championship</button>
     </div>
     <div class="gallery-grid">
       {"".join(gallery_item(*item) for item in GALLERY_ITEMS)}
     </div>
-    <p class="center fine-print">Season photography coming as the summer gets underway &mdash; the graphics above are placeholders.</p>
+    <p class="center fine-print">More photography &mdash; including championship weekend &mdash; will be added as the {SEASON.lower()} season gets underway.</p>
   </div>
 </section>
 {lightbox()}

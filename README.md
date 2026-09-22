@@ -30,20 +30,27 @@ Two things worth knowing:
 
 To switch to a different provider (Formspree, Getform, Web3Forms), just change the `action` attribute on both forms.
 
-## Swapping in real photos
+## Photos
 
-Every image in `images/gallery/` and `images/blog/` is a generated brand graphic standing in for real photography. To replace one, **save your photo over the existing file using the same filename** — no code changes needed.
+The gallery, hero background, About page image, and the two division-page photos are all real match photography now — `dev-tools/process_photos.py` is the script that resized and cropped the original uploads into the files below. `images/blog/blog-1.jpg` … `blog-3.jpg` are still the generated brand-graphic placeholders (swap those in the same way whenever you have article photography).
 
 | Files | Used for | Best size |
 |---|---|---|
-| `images/gallery/gallery-1.jpg` … `gallery-8.jpg` | Photo gallery + home page | 1000 × 750 (4:3) |
-| `images/blog/blog-1.jpg` … `blog-3.jpg` | Article headers and cards | 1000 × 560 (16:9) |
-| `images/hero.jpg` | Home page hero background | 1920 × 1080 |
-| `images/about.jpg` | About page and home page | 1200 × 800 |
+| `images/gallery/gallery-1.jpg` … `gallery-12.jpg` | Photo gallery, home page cards/teaser, division pages | ~1500px on the long side, any aspect ratio (CSS crops to fit) |
+| `images/blog/blog-1.jpg` … `blog-3.jpg` | Article headers and cards (still placeholders) | 1000 × 560 (16:9) |
+| `images/hero.jpg` | Home page hero background | ~2400 × 1230 |
+| `images/about.jpg` | About page and home page "our story" image | ~1500 × 1125 |
 
-Gallery captions live in `dev-tools/build.py` (`GALLERY_ITEMS`) if you want to retitle them.
+To add or swap a photo, drop it in `dev-tools/photo_sources/` (or point at it directly), update the filename in the `GALLERY` dict at the top of `dev-tools/process_photos.py`, and re-run:
 
-Free, commercially-usable stock photography: [Unsplash](https://unsplash.com), [Pexels](https://pexels.com), [Pixabay](https://pixabay.com). Search "high school soccer", "youth soccer match", "soccer pitch". All three allow commercial use without attribution — but real photos of your own teams will always beat stock.
+```bash
+python3 dev-tools/process_photos.py
+python3 dev-tools/build.py
+```
+
+Gallery captions and category tags (Boys / Girls / Matchday) live in `dev-tools/build.py` (`GALLERY_ITEMS`) — edit the tuple for a given gallery number to retitle or re-tag it. The `photos.html` filter bar only shows a "Championship" button once at least one photo is tagged `championship`.
+
+Free, commercially-usable stock photography if you ever need to fill a gap: [Unsplash](https://unsplash.com), [Pexels](https://pexels.com), [Pixabay](https://pixabay.com).
 
 ## Logo and colours
 

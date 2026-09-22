@@ -395,6 +395,15 @@ section { padding: 76px 0; }
 }
 .league-block.girls { border-top-color: var(--cyan); }
 .league-block h2 { margin: 12px 0 0; }
+.league-photo {
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  box-shadow: var(--shadow);
+  margin: 18px 0 24px;
+}
+.league-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; display: block; }
+@media (max-width: 620px) { .league-photo { aspect-ratio: 4 / 3; } }
 .league-head {
   display: flex;
   align-items: flex-end;
