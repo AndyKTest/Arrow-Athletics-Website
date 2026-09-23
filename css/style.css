@@ -305,16 +305,12 @@ section { padding: 76px 0; }
 }
 .split-media img { border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
 .merch-card {
-  background: var(--paper);
-  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-  padding: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  line-height: 0;
 }
-.merch-card img { width: 100%; max-width: 420px; height: auto; display: block; }
+.merch-card img { width: 100%; height: auto; display: block; }
 @media (max-width: 880px) { .split { grid-template-columns: 1fr; gap: 36px; } }
 
 .grid { display: grid; gap: 28px; }

@@ -1017,7 +1017,7 @@ def page_merch():
   <div class="container">
     <div class="split">
       <div class="merch-card">
-        <img src="images/merch-jersey.png" alt="Mock-up of a light blue {SITE_NAME} jersey with the team logo and a 'your team name here' placeholder" loading="lazy">
+        <img src="images/merch-jersey.png" alt="Mock-up of a navy and blue {SITE_NAME} custom soccer jersey, front and back, with a sample player name and number" loading="lazy">
       </div>
       <div>
         <p class="eyebrow">Coming Soon</p>

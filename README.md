@@ -40,6 +40,7 @@ The gallery, hero background, About page image, and the two division-page photos
 | `images/blog/blog-1.jpg` … `blog-3.jpg` | Article headers and cards (still placeholders) | 1000 × 560 (16:9) |
 | `images/hero.jpg` | Home page hero background | ~2400 × 1230 |
 | `images/about.jpg` | About page and home page "our story" image | ~1500 × 1125 |
+| `images/merch-jersey.png` | Merch page jersey mock-up | Supplied directly (not generated) — swap the file for a real product photo whenever one exists, same filename |
 
 To add or swap a photo, drop it in `dev-tools/photo_sources/` (or point at it directly), update the filename in the `GALLERY` dict at the top of `dev-tools/process_photos.py`, and re-run:
 
