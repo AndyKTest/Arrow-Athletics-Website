@@ -15,6 +15,8 @@ EMAIL = "info@arrow-athletics.com"
 PHONE_DISPLAY = "+1 (774) 270-9555"
 PHONE_LINK = "+17742709555"
 DOMAIN = "https://arrow-athletics.com"
+INSTAGRAM_HANDLE = "arrowathleticss"
+INSTAGRAM_URL = f"https://instagram.com/{INSTAGRAM_HANDLE}"
 
 # Where registration + contact submissions are emailed.
 # FormSubmit relays the submission straight to the address below — no account needed.
@@ -25,6 +27,7 @@ NAV_ITEMS = [
     ("about.html", "About"),
     ("programs.html", "Divisions"),
     ("photos.html", "Photos"),
+    ("merch.html", "Merch"),
     ("blog.html", "News"),
     ("contact.html", "Contact"),
 ]
@@ -88,9 +91,9 @@ def footer():
     <div class="footer-grid">
       <div>
         <img src="images/logo-white.png" alt="{SITE_NAME}" class="footer-logo">
-        <p>{CUP_NAME} is a {SEASON.lower()} soccer league for high school boys' and girls' teams &mdash; real divisions, real officiating, and a championship weekend to finish the summer.</p>
+        <p>{CUP_NAME} is a summer soccer league for high school boys' and girls' teams &mdash; real divisions, real officiating, and a championship weekend to finish the summer.</p>
         <div class="social-row">
-          <a href="#" aria-label="Instagram" title="Instagram">
+          <a href="{INSTAGRAM_URL}" aria-label="Instagram" title="@{INSTAGRAM_HANDLE} on Instagram" target="_blank" rel="noopener">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
           </a>
           <a href="#" aria-label="Facebook" title="Facebook">
@@ -124,6 +127,7 @@ def footer():
         <ul>
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
           <li><a href="tel:{PHONE_LINK}">{PHONE_DISPLAY}</a></li>
+          <li><a href="{INSTAGRAM_URL}" target="_blank" rel="noopener">@{INSTAGRAM_HANDLE}</a></li>
           <li><span>{SEASON} &middot; Registration open</span></li>
         </ul>
       </div>
@@ -168,6 +172,7 @@ ICON = {
     "mail": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M4 6.5l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
     "phone": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 3h3l1.5 4-2 1.5a12 12 0 006 6l1.5-2 4 1.5v3a2 2 0 01-2.2 2A17 17 0 014 5.2 2 2 0 016 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>',
     "clock": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    "instagram": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>',
 }
 
 
@@ -199,7 +204,7 @@ def blog_card(href, img, cat, tag_label, title, excerpt):
 # HOME
 # =========================================================
 def page_home():
-    html = head("Home", f"{CUP_NAME} is a {SEASON.lower()} soccer league for high school boys' and girls' teams — four divisions, weekly matches, and a championship weekend.")
+    html = head("Home", f"{CUP_NAME} is a summer soccer league for high school boys' and girls' teams — four divisions, weekly matches, and a championship weekend.")
     html += header("index.html")
     html += f"""
 <section class="hero">
@@ -928,6 +933,10 @@ def page_contact():
           <div><strong>Phone</strong><a href="tel:{PHONE_LINK}">{PHONE_DISPLAY}</a></div>
         </div>
         <div class="contact-row">
+          <span class="ic">{ICON['instagram']}</span>
+          <div><strong>Instagram</strong><a href="{INSTAGRAM_URL}" target="_blank" rel="noopener">@{INSTAGRAM_HANDLE}</a></div>
+        </div>
+        <div class="contact-row">
           <span class="ic">{ICON['clock']}</span>
           <div><strong>Season</strong><span>{SEASON} &middot; registration open</span></div>
         </div>
@@ -936,7 +945,7 @@ def page_contact():
           <div><strong>Entering a team?</strong><a href="register.html">Use the registration form &rarr;</a></div>
         </div>
         <div class="social-row">
-          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/></svg></a>
+          <a href="{INSTAGRAM_URL}" aria-label="Instagram" title="@{INSTAGRAM_HANDLE} on Instagram" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/></svg></a>
           <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 8.5h2V5h-2c-2.2 0-4 1.8-4 4v2H9v3.5h2V21h3.5v-6.5H17l.5-3.5h-3V9c0-.6.4-1 1-1z" fill="currentColor"/></svg></a>
         </div>
       </aside>
@@ -987,6 +996,84 @@ def page_contact():
 
 
 write("contact.html", page_contact())
+
+
+# =========================================================
+# MERCH
+# =========================================================
+def page_merch():
+    html = head("Merch", f"{SITE_NAME} team merch and custom jerseys — coming soon.")
+    html += header("merch.html")
+    html += f"""
+<section class="page-hero">
+  <div class="container">
+    <p class="breadcrumb">Shop</p>
+    <h1>Team Merch &amp; Jerseys</h1>
+    <p>Custom {SITE_NAME} jerseys for your squad &mdash; order forms open soon.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="split">
+      <div class="merch-card">
+        <img src="images/merch-jersey.png" alt="Mock-up of a light blue {SITE_NAME} jersey with the team logo and a 'your team name here' placeholder" loading="lazy">
+      </div>
+      <div>
+        <p class="eyebrow">Coming Soon</p>
+        <h2>Custom jerseys, made for your team</h2>
+        <p>We're setting up an online shop where every registered team can order custom {SITE_NAME} jerseys &mdash; your team name, your colors, your players' names and numbers &mdash; shipped straight to your door.</p>
+        <p>The shop isn't live yet, but it's coming before the season kicks off. Register your team or get in touch and we'll let you know the moment ordering opens.</p>
+        <div class="hero-actions">
+          <a href="register.html" class="btn btn-primary">Register a Team</a>
+          <a href="contact.html" class="btn btn-navy">Get Notified</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="container">
+    <div class="center stack">
+      <p class="eyebrow">What's Coming</p>
+      <h2>Built for teams, not just fans</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="feature">
+        <div class="feature-icon">{ICON['shield']}</div>
+        <div><h3>Custom Team Jerseys</h3><p>Your team name and colors on a real match-ready jersey.</p></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">{ICON['users']}</div>
+        <div><h3>Names &amp; Numbers</h3><p>Personalize every jersey on the roster, player by player.</p></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">{ICON['bolt']}</div>
+        <div><h3>Ordered Online</h3><p>Simple online ordering, shipped directly to your team.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Want first access when the shop opens?</h2>
+      <p class="lede mx-auto">Register your team or send us a message and we'll reach out the moment jersey ordering goes live.</p>
+      <div class="cta-actions">
+        <a href="register.html" class="btn btn-white btn-lg">Register a Team</a>
+        <a href="contact.html" class="btn btn-ghost btn-lg">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+    html += footer()
+    return html
+
+
+write("merch.html", page_merch())
 
 
 # =========================================================
