@@ -204,7 +204,7 @@ def blog_card(href, img, cat, tag_label, title, excerpt):
 # HOME
 # =========================================================
 def page_home():
-    html = head("Home", f"{CUP_NAME} is a summer soccer league for high school boys' and girls' teams — four divisions, weekly matches, and a championship weekend.")
+    html = head("Home", f"{CUP_NAME} is a summer soccer league for high school boys' and girls' teams — four divisions, two games a week, and a championship weekend.")
     html += header("index.html")
     html += f"""
 <section class="hero">
@@ -213,15 +213,15 @@ def page_home():
   <div class="hero-inner">
     <p class="eyebrow light">{SEASON} &middot; Boys &amp; Girls High School Soccer</p>
     <h1>High school soccer<br><span class="accent">doesn't stop</span> in the fall.</h1>
-    <p class="lede">{CUP_NAME} is a summer league built for high school teams &mdash; boys' and girls', varsity and JV. Weekly matches, certified officials, and a championship weekend worth training for.</p>
+    <p class="lede">{CUP_NAME} is a summer league built for high school teams &mdash; boys' and girls', varsity and JV. Two games a week, certified officials, and a championship weekend worth training for.</p>
     <div class="hero-actions">
       <a href="register.html" class="btn btn-primary btn-lg">Register a Team</a>
       <a href="programs.html" class="btn btn-outline btn-lg">See Divisions</a>
     </div>
     <div class="stat-strip">
       <div class="stat-item"><strong>4</strong><span>Divisions</span></div>
-      <div class="stat-item"><strong>9&ndash;12</strong><span>Grades eligible</span></div>
-      <div class="stat-item"><strong>8</strong><span>Week season</span></div>
+      <div class="stat-item"><strong>5</strong><span>Week season</span></div>
+      <div class="stat-item"><strong>10</strong><span>Games total</span></div>
       <div class="stat-item"><strong>1</strong><span>Championship weekend</span></div>
     </div>
   </div>
@@ -256,7 +256,7 @@ def page_home():
         <a class="card-media" href="programs.html#boys"><img src="images/gallery/gallery-1.jpg" alt="Boys high school division" loading="lazy"><span class="tag tag-boys">Boys</span></a>
         <div class="card-body">
           <h3>Boys' High School Divisions</h3>
-          <p>Varsity and JV brackets for boys in grades 9&ndash;12. Full 11v11 matches every week of the regular season.</p>
+          <p>Varsity and JV brackets for boys in grades 9&ndash;12. Full 11v11 matches twice a week through the regular season.</p>
           <a class="more-link" href="programs.html#boys">Divisions &amp; format &rarr;</a>
         </div>
       </article>
@@ -264,7 +264,7 @@ def page_home():
         <a class="card-media" href="programs.html#girls"><img src="images/gallery/gallery-3.jpg" alt="Girls high school division" loading="lazy"><span class="tag tag-girls">Girls</span></a>
         <div class="card-body">
           <h3>Girls' High School Divisions</h3>
-          <p>The same structure for girls' teams &mdash; varsity and JV brackets, weekly matches, and a shot at the Cup.</p>
+          <p>The same structure for girls' teams &mdash; varsity and JV brackets, two games a week, and a shot at the Cup.</p>
           <a class="more-link" href="programs.html#girls">Divisions &amp; format &rarr;</a>
         </div>
       </article>
@@ -281,7 +281,7 @@ def page_home():
     <div class="grid grid-3">
       <div class="feature">
         <div class="feature-icon">{ICON['calendar']}</div>
-        <div><h3>Weekly Matches</h3><p>An eight-week regular season through June and July, scheduled by division.</p></div>
+        <div><h3>Two Games a Week</h3><p>A five-week regular season through June and July &mdash; ten games total, scheduled by division.</p></div>
       </div>
       <div class="feature">
         <div class="feature-icon">{ICON['whistle']}</div>
@@ -443,7 +443,7 @@ def page_programs():
   <div class="container">
     <p class="breadcrumb">Divisions</p>
     <h1>Boys' &amp; Girls' High School Soccer</h1>
-    <p>Four divisions for athletes in grades 9&ndash;12, running one eight-week season with a championship weekend to close it out.</p>
+    <p>Four divisions for athletes in grades 9&ndash;12, running a five-week season &mdash; two games a week, ten games total &mdash; with a championship weekend to close it out.</p>
   </div>
 </section>
 
@@ -473,7 +473,7 @@ def page_programs():
         </div>
         <a href="register.html" class="btn btn-primary btn-sm">Register a Girls' Team</a>
       </div>
-      <p>The same structure for girls' teams &mdash; varsity and JV brackets, weekly matches, and a place in the championship bracket at the end of the summer.</p>
+      <p>The same structure for girls' teams &mdash; varsity and JV brackets, two games a week, and a place in the championship bracket at the end of the summer.</p>
       <div class="league-photo"><img src="images/gallery/gallery-5.jpg" alt="Girls high school soccer action" loading="lazy"></div>
       {division_table([
           ("Girls Varsity", "Grades 9&ndash;12", "11v11, full pitch, two 40-minute halves"),
@@ -492,7 +492,7 @@ def page_programs():
     <div class="grid grid-4">
       <div class="feature">
         <div class="feature-icon">{ICON['calendar']}</div>
-        <div><h3>Eight Weeks</h3><p>A regular season across June and July, one match per week per team.</p></div>
+        <div><h3>Five Weeks</h3><p>A regular season across June and July &mdash; two matches a week per team, ten games total.</p></div>
       </div>
       <div class="feature">
         <div class="feature-icon">{ICON['whistle']}</div>
@@ -540,7 +540,7 @@ FAQ = [
     ("Do we need to enter a full team?",
      "Yes &mdash; the Cup is a team competition. If you have a partial roster, get in touch and we'll try to connect you with other players in your area."),
     ("When does the season run?",
-     "The regular season runs eight weeks through June and July, with championship weekend in August. Exact dates are confirmed with teams at registration."),
+     "The regular season runs five weeks through June and July &mdash; two games a week, ten games total &mdash; with championship weekend in August. Exact dates are confirmed with teams at registration."),
     ("What does it cost?",
      "Fees depend on division and field costs for the season. We'll send the current fee schedule when we follow up on your registration."),
     ("Who coaches the teams?",
@@ -847,9 +847,9 @@ article(
     [
         ("p", f"Registration for the {SEASON} {CUP_NAME} is open. Four divisions are running this summer &mdash; boys' varsity, boys' JV, girls' varsity and girls' JV &mdash; all for athletes in grades 9&ndash;12."),
         ("h2", "What a team gets"),
-        ("p", "Every registered team plays a full eight-week regular season with officiated matches, published standings, and a place in the championship bracket in August."),
+        ("p", "Every registered team plays a full five-week regular season &mdash; two games a week, ten games total &mdash; with officiated matches, published standings, and a place in the championship bracket in August."),
         ("ul", [
-            "Weekly 11v11 fixtures through June and July",
+            "Two 11v11 fixtures a week through June and July",
             "Certified referees on every match",
             "Standings tracked and published through the season",
             "A guaranteed spot in championship weekend",
@@ -870,13 +870,13 @@ article(
         ("h2", "1. Play a position you want to own"),
         ("p", "Summer is the low-risk window to get real minutes somewhere new. If you want to move into midfield in the fall, this is the season to prove you can do it."),
         ("h2", "2. Build the fitness base now"),
-        ("p", "Preseason is a brutal place to start getting fit. Players who arrive in August already carrying eight weeks of match fitness spend preseason competing instead of surviving."),
+        ("p", "Preseason is a brutal place to start getting fit. Players who arrive in August already carrying five weeks of twice-a-week match fitness spend preseason competing instead of surviving."),
         ("h2", "3. Treat every match like it's scouted"),
         ("p", "Your school coach hears about summer form &mdash; from you, from teammates, from other coaches in the area. Consistency across a season says more than one good game."),
         ("h2", "4. Learn to lead"),
         ("p", "Summer rosters mix players from different programs, which makes communication harder and more valuable. Players who organize a back line in July tend to wear the armband in October."),
         ("h2", "5. Actually recover"),
-        ("p", "Eight weeks of matches in summer heat is a real load. Hydration, sleep, and at least one genuine rest day a week are what keep a strong summer from turning into an injured fall."),
+        ("p", "Two matches a week in summer heat is a real load. Hydration, sleep, and at least one genuine rest day a week are what keep a strong summer from turning into an injured fall."),
     ],
 )
 
@@ -888,7 +888,7 @@ article(
         ("h2", "Rosters"),
         ("p", "Squads carry up to 22 players, all enrolled in grades 9&ndash;12 for the coming school year. You can enter a full school team or build a combined roster from players across a town or region."),
         ("h2", "The schedule"),
-        ("p", "One match per week per team across an eight-week regular season, then championship weekend in August. We work around the obvious summer conflicts &mdash; camps, vacations, and team commitments &mdash; where we can, so tell us about them at registration."),
+        ("p", "Two matches a week per team across a five-week regular season &mdash; ten games total &mdash; then championship weekend in August. We work around the obvious summer conflicts &mdash; camps, vacations, and team commitments &mdash; where we can, so tell us about them at registration."),
         ("h2", "What you're responsible for"),
         ("ul", [
             "Naming a coach or team manager as the league contact",
