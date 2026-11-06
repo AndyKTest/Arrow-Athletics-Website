@@ -12,7 +12,7 @@ EAGER_LOAD_JS = """async () => {
 
 pages = sys.argv[1:] or ["index.html", "about.html", "programs.html", "register.html",
                          "photos.html", "blog.html", "contact.html", "thanks.html",
-                         "blog-registration-open.html"]
+                         "merch.html"]
 
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path="/opt/pw-browsers/chromium")

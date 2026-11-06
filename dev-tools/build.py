@@ -7,10 +7,15 @@ Run from the repo root:   python3 dev-tools/build.py
 """
 import os
 
-SITE_NAME = "Arrow Athletics"
-CUP_NAME = "Arrow Cup"
-SEASON = "Summer 2026"
-YEAR = "2026"
+SITE_NAME = "Arrow Athletics"          # the organization
+LEAGUE_NAME = "Arrow League"           # the summer league itself
+CUP_NAME = "Arrow Cup"                 # the end-of-season knockout tournament
+SEASON = "Summer 2027"                 # first season
+STATE = "Massachusetts"
+PRICE = "<span class=\"nowrap\">$1,700&ndash;$1,850</span>"          # team price range (from the coaches deck)
+TAGLINE = "Hit Your Target"
+CTA_LABEL = "Interested in Participating?"   # main call to action -> register.html (interest form)
+YEAR = "2026"                          # copyright year fallback (main.js updates it)
 EMAIL = "info@arrow-athletics.com"
 PHONE_DISPLAY = "+1 (774) 270-9555"
 PHONE_LINK = "+17742709555"
@@ -72,7 +77,7 @@ def header(active):
     <nav>
       <ul class="nav-links">
         {links_html}
-        <li class="nav-cta"><a href="register.html" class="btn btn-primary btn-sm">Register a Team</a></li>
+        <li class="nav-cta"><a href="register.html" class="btn btn-primary btn-sm">{CTA_LABEL}</a></li>
       </ul>
     </nav>
     <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -91,13 +96,10 @@ def footer():
     <div class="footer-grid">
       <div>
         <img src="images/logo-white.png" alt="{SITE_NAME}" class="footer-logo">
-        <p>{CUP_NAME} is a summer soccer league for high school boys' and girls' teams &mdash; real divisions, real officiating, and a championship weekend to finish the summer.</p>
+        <p>The {LEAGUE_NAME} is a summer soccer league for high school boys' and girls' teams across {STATE} &mdash; six divisions, real referees, and the {CUP_NAME} to finish the summer.</p>
         <div class="social-row">
           <a href="{INSTAGRAM_URL}" aria-label="Instagram" title="@{INSTAGRAM_HANDLE} on Instagram" target="_blank" rel="noopener">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
-          </a>
-          <a href="#" aria-label="Facebook" title="Facebook">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 8.5h2V5h-2c-2.2 0-4 1.8-4 4v2H9v3.5h2V21h3.5v-6.5H17l.5-3.5h-3V9c0-.6.4-1 1-1z" fill="currentColor"/></svg>
           </a>
           <a href="mailto:{EMAIL}" aria-label="Email us" title="Email us">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M4 6.5l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
@@ -116,9 +118,9 @@ def footer():
       <div>
         <h4>Get Involved</h4>
         <ul>
-          <li><a href="register.html">Register a Team</a></li>
+          <li><a href="register.html">{CTA_LABEL}</a></li>
           <li><a href="contact.html">Coach &amp; Referee Inquiries</a></li>
-          <li><a href="contact.html">Sponsor the Cup</a></li>
+          <li><a href="contact.html">Sponsor the League</a></li>
           <li><a href="contact.html">General Questions</a></li>
         </ul>
       </div>
@@ -128,13 +130,13 @@ def footer():
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
           <li><a href="tel:{PHONE_LINK}">{PHONE_DISPLAY}</a></li>
           <li><a href="{INSTAGRAM_URL}" target="_blank" rel="noopener">@{INSTAGRAM_HANDLE}</a></li>
-          <li><span>{SEASON} &middot; Registration open</span></li>
+          <li><span>{SEASON} &middot; Registration opens soon</span></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>&copy; <span data-year>{YEAR}</span> {SITE_NAME}. All rights reserved.</span>
-      <span>High school boys' &amp; girls' summer soccer.</span>
+      <span>{TAGLINE}.</span>
     </div>
   </div>
 </footer>
@@ -172,6 +174,11 @@ ICON = {
     "mail": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M4 6.5l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
     "phone": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 3h3l1.5 4-2 1.5a12 12 0 006 6l1.5-2 4 1.5v3a2 2 0 01-2.2 2A17 17 0 014 5.2 2 2 0 016 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>',
     "clock": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    "home": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 11l8-6.5 8 6.5V20a1 1 0 01-1 1h-4.5v-5.5h-5V21H5a1 1 0 01-1-1v-9z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>',
+    "levels": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 20v-5M12 20V10M19 20V4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+    "cap": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M2.5 9.5L12 5l9.5 4.5L12 14 2.5 9.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M6.5 11.5V16c0 1.4 2.5 3 5.5 3s5.5-1.6 5.5-3v-4.5M21.5 9.5V15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    "map": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 4L3.5 6v14L9 18l6 2 5.5-2V4L15 6 9 4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 4v14M15 6v14" stroke="currentColor" stroke-width="1.7"/></svg>',
+    "check": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     "instagram": '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>',
 }
 
@@ -189,40 +196,112 @@ def form_hidden(subject, honey=True):
     return h
 
 
-def blog_card(href, img, cat, tag_label, title, excerpt):
-    return f"""<article class="card">
-        <a class="card-media" href="{href}"><img src="{img}" alt="{title}" loading="lazy"><span class="tag tag-{cat}">{tag_label}</span></a>
-        <div class="card-body">
-          <h3><a href="{href}">{title}</a></h3>
-          <p>{excerpt}</p>
-          <a class="more-link" href="{href}">Read more &rarr;</a>
-        </div>
-      </article>"""
+
+
+# =========================================================
+# SHARED LEAGUE CONTENT (kept in step with the coaches deck)
+# =========================================================
+LEAGUE_ABOUT = (f"The {LEAGUE_NAME} brings together high school boys and girls across {STATE}, giving them a chance "
+                "to keep playing through the summer offseason. With a structured format, clear guidelines, a divisional "
+                "setup and referees, the league turns casual summer pickup into a consistent opportunity to sharpen your "
+                "skills, build team chemistry, and get reps with others who love the game.")
+
+DIVISIONS = [
+    ("Division 1", "Top-level competition"),
+    ("Division 2", "Competitive play for rising teams"),
+    ("Division 3", "Development and building experience"),
+]
+MATCH_FORMAT = "11v11 &middot; two 40-minute halves"
+
+WHY = [
+    ("home", "Your school, your summer", "Keep your team together and keep representing your school, with your own players and your own coaches."),
+    ("levels", "Play at your level", "We work with each team to find the right division, so every team finds games that fit."),
+    ("bolt", "Stay sharp for fall", "Ten games over five weeks keep your players in rhythm heading into the fall season."),
+    ("cap", "College coach exposure", "Put your players in front of college coaches and into the recruiting conversation."),
+    ("map", "Best team in the state", f"Compete against teams from across {STATE} to find out who the best team in the state really is."),
+    ("whistle", "We run the league", "Scheduling, referees and standings are handled by us, so you can focus on coaching, playing and developing."),
+]
+
+SEASON_STEPS = [
+    ("Get placed in a division", ["Work with our coordinators to find the right fit",
+                                  "Boys and girls each have Divisions 1, 2 and 3",
+                                  "Each division is split into pools"]),
+    ("Pool play", ["Five weeks, July into August",
+                   "Two weekday games a week, 4 to 9 p.m.",
+                   f"Pool results decide who advances to the {CUP_NAME}"]),
+    (f"The {CUP_NAME}", ["A knockout bracket on the final weekend of the season",
+                         "Top teams from each pool face off over three days",
+                         "Every game is win or go home"]),
+    ("Six champions", ["One title for each division",
+                       "Boys and girls Divisions 1, 2 and 3",
+                       f"Medals, a trophy, and the honor of winning the {CUP_NAME}"]),
+]
+
+INCLUDED_STATS = [("40", "Minute halves"), ("1", "Referee per game"), ("30", "Players max per roster"), ("2+", "Captains per team")]
+
+FOUNDERS = [
+    ("images/team/andrew.jpg", "Andrew Kovacs", [
+        "10 years of club soccer at Boston Bolts",
+        "Four-year varsity player and team captain at St. John&rsquo;s High School, Shrewsbury",
+        "Four years at Worcester Polytechnic Institute, serving as team captain",
+        "Graduated in May 2025",
+    ]),
+    ("images/team/greg.jpg", "Gregory Kovacs", [
+        "10 years of club soccer at Boston Bolts",
+        "Four-year varsity player and team captain at St. John&rsquo;s High School, Shrewsbury",
+        "Currently playing club soccer at Fairfield University",
+        "Graduating in May 2027",
+    ]),
+]
+
+
+def ul(items, cls=""):
+    c = f' class="{cls}"' if cls else ""
+    return f"<ul{c}>" + "".join(f"<li>{i}</li>" for i in items) + "</ul>"
+
+
+def cta_banner(title, text, secondary_href=None, secondary_label=None):
+    second = ""
+    if secondary_href:
+        second = f'\n        <a href="{secondary_href}" class="btn btn-ghost btn-lg">{secondary_label}</a>'
+    return f"""
+<section class="section-tight">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>{title}</h2>
+      <p class="lede mx-auto">{text}</p>
+      <div class="cta-actions">
+        <a href="register.html" class="btn btn-white btn-lg">{CTA_LABEL}</a>{second}
+      </div>
+    </div>
+  </div>
+</section>
+"""
 
 
 # =========================================================
 # HOME
 # =========================================================
 def page_home():
-    html = head("Home", f"{CUP_NAME} is a summer soccer league for high school boys' and girls' teams — four divisions, two games a week, and a championship weekend.")
+    html = head("Home", f"The {LEAGUE_NAME} is a summer soccer league for high school boys' and girls' teams across {STATE}: six divisions, ten games in five weeks, and the {CUP_NAME}.")
     html += header("index.html")
     html += f"""
 <section class="hero">
   <div class="hero-bg" style="background-image:url('images/hero.jpg')"></div>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
-    <p class="eyebrow light">{SEASON} &middot; Boys &amp; Girls High School Soccer</p>
+    <p class="eyebrow light">Est. {SEASON} &middot; {STATE} &middot; Boys &amp; Girls</p>
     <h1>High school soccer<br><span class="accent">doesn't stop</span> in the fall.</h1>
-    <p class="lede">{CUP_NAME} is a summer league built for high school teams &mdash; boys' and girls', varsity and JV. Two games a week, certified officials, and a championship weekend worth training for.</p>
+    <p class="lede">The {LEAGUE_NAME} is a summer league for high school boys' and girls' teams across {STATE}. Ten games in five weeks, a referee on every game, and the {CUP_NAME} to play for.</p>
     <div class="hero-actions">
-      <a href="register.html" class="btn btn-primary btn-lg">Register a Team</a>
+      <a href="register.html" class="btn btn-primary btn-lg">{CTA_LABEL}</a>
       <a href="programs.html" class="btn btn-outline btn-lg">See Divisions</a>
     </div>
     <div class="stat-strip">
-      <div class="stat-item"><strong>4</strong><span>Divisions</span></div>
+      <div class="stat-item"><strong>6</strong><span>Divisions</span></div>
       <div class="stat-item"><strong>5</strong><span>Week season</span></div>
-      <div class="stat-item"><strong>10</strong><span>Games total</span></div>
-      <div class="stat-item"><strong>1</strong><span>Championship weekend</span></div>
+      <div class="stat-item"><strong>10</strong><span>Games per team</span></div>
+      <div class="stat-item"><strong>6</strong><span>Champions crowned</span></div>
     </div>
   </div>
 </section>
@@ -231,14 +310,14 @@ def page_home():
   <div class="container">
     <div class="split">
       <div>
-        <p class="eyebrow">What is the {CUP_NAME}?</p>
+        <p class="eyebrow">What is the {LEAGUE_NAME}?</p>
         <h2>Summer soccer that actually counts.</h2>
-        <p>Most high school players spend the summer scrimmaging in pickup games or waiting for preseason. {CUP_NAME} gives them somewhere real to play &mdash; a structured league with standings, officials, and a title on the line, running through the heart of the summer.</p>
-        <p>Teams enter as school squads or as combined rosters of high school players. Boys' and girls' divisions run side by side, each split into varsity and JV so everyone competes at the right level.</p>
-        <a href="about.html" class="btn btn-navy">More About the League</a>
+        <p>{LEAGUE_ABOUT}</p>
+        <p>Boys' and girls' teams each play in Division 1, 2 or 3, and our league coordinators work with every team to find the right fit.</p>
+        <a href="about.html" class="btn btn-navy">Meet the Founders</a>
       </div>
       <div class="split-media">
-        <img src="images/about.jpg" alt="{CUP_NAME} high school summer soccer league" loading="lazy">
+        <img src="images/about.jpg" alt="High school team huddle before a game" loading="lazy">
       </div>
     </div>
   </div>
@@ -248,23 +327,23 @@ def page_home():
   <div class="container">
     <div class="center stack">
       <p class="eyebrow">Divisions</p>
-      <h2>Four divisions. One summer.</h2>
-      <p class="lede mx-auto">Boys' and girls' brackets, each with varsity and JV play, for athletes in grades 9&ndash;12.</p>
+      <h2>Six divisions. One summer.</h2>
+      <p class="lede mx-auto">Divisions 1, 2 and 3 for both boys' and girls' high school teams.</p>
     </div>
     <div class="grid grid-2">
       <article class="card card-feature">
-        <a class="card-media" href="programs.html#boys"><img src="images/gallery/gallery-1.jpg" alt="Boys high school division" loading="lazy"><span class="tag tag-boys">Boys</span></a>
+        <a class="card-media" href="programs.html#boys"><img src="images/gallery/gallery-16.jpg" alt="Boys high school soccer action" loading="lazy"><span class="tag tag-boys">Boys</span></a>
         <div class="card-body">
-          <h3>Boys' High School Divisions</h3>
-          <p>Varsity and JV brackets for boys in grades 9&ndash;12. Full 11v11 matches twice a week through the regular season.</p>
+          <h3>Boys' Divisions</h3>
+          <p>Divisions 1, 2 and 3 for boys' high school teams. Full 11v11 games with 40-minute halves, two weeknights a week.</p>
           <a class="more-link" href="programs.html#boys">Divisions &amp; format &rarr;</a>
         </div>
       </article>
       <article class="card card-feature">
-        <a class="card-media" href="programs.html#girls"><img src="images/gallery/gallery-3.jpg" alt="Girls high school division" loading="lazy"><span class="tag tag-girls">Girls</span></a>
+        <a class="card-media" href="programs.html#girls"><img src="images/gallery/gallery-3.jpg" alt="Girls high school soccer action" loading="lazy"><span class="tag tag-girls">Girls</span></a>
         <div class="card-body">
-          <h3>Girls' High School Divisions</h3>
-          <p>The same structure for girls' teams &mdash; varsity and JV brackets, two games a week, and a shot at the Cup.</p>
+          <h3>Girls' Divisions</h3>
+          <p>The same structure for girls' teams: Divisions 1, 2 and 3, two games a week, and a shot at the {CUP_NAME}.</p>
           <a class="more-link" href="programs.html#girls">Divisions &amp; format &rarr;</a>
         </div>
       </article>
@@ -281,15 +360,15 @@ def page_home():
     <div class="grid grid-3">
       <div class="feature">
         <div class="feature-icon">{ICON['calendar']}</div>
-        <div><h3>Two Games a Week</h3><p>A five-week regular season through June and July &mdash; ten games total, scheduled by division.</p></div>
+        <div><h3>Two Games a Week</h3><p>Five weeks of pool play from July into August, on weeknights between 4 and 9 p.m.</p></div>
       </div>
       <div class="feature">
         <div class="feature-icon">{ICON['whistle']}</div>
-        <div><h3>Certified Officials</h3><p>Every match is refereed and scored, with standings tracked all summer.</p></div>
+        <div><h3>A Referee Every Game</h3><p>We handle scheduling, referees and standings, so teams can focus on playing.</p></div>
       </div>
       <div class="feature">
         <div class="feature-icon">{ICON['trophy']}</div>
-        <div><h3>{CUP_NAME} Weekend</h3><p>The season ends in a championship bracket &mdash; one title per division.</p></div>
+        <div><h3>The {CUP_NAME}</h3><p>Top teams from each pool meet in a knockout bracket on the final weekend. Six divisions, six champions.</p></div>
       </div>
     </div>
   </div>
@@ -298,44 +377,19 @@ def page_home():
 <section class="band">
   <div class="container">
     <div class="center stack">
-      <p class="eyebrow">From the League</p>
-      <h2>News &amp; updates</h2>
-    </div>
-    <div class="grid grid-3">
-      {blog_card("blog-registration-open.html", "images/blog/blog-1.jpg", "news", "News", f"Registration Is Open for {SEASON}", "Boys' and girls' divisions are open for high school teams. Here's what coaches need to know before entering a squad.")}
-      {blog_card("blog-summer-prep.html", "images/blog/blog-2.jpg", "tips", "Players", "Using the Summer Before Fall Tryouts", "Five ways high school players can turn a summer season into a stronger fall with their school team.")}
-      {blog_card("blog-coaches-guide.html", "images/blog/blog-3.jpg", "coaches", "Coaches", "A Coach's Guide to Entering a Team", "Roster rules, scheduling, and what your program is signing up for when you enter the Cup.")}
-    </div>
-    <div class="center" style="margin-top:36px;"><a href="blog.html" class="btn btn-navy">All Updates</a></div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="center stack">
       <p class="eyebrow">Gallery</p>
-      <h2>Around the league</h2>
+      <h2>On the field</h2>
     </div>
     <div class="grid grid-4 tight">
-      {"".join(f'<a href="photos.html" class="thumb"><img src="images/gallery/gallery-{n}.jpg" alt="{CUP_NAME} gallery" loading="lazy"></a>' for n in [2, 5, 6, 8])}
+      {"".join(f'<a href="photos.html" class="thumb"><img src="images/gallery/gallery-{n}.jpg" alt="High school soccer photo" loading="lazy"></a>' for n in [18, 5, 15, 17])}
     </div>
     <div class="center" style="margin-top:32px;"><a href="photos.html" class="btn btn-navy">Full Gallery</a></div>
   </div>
 </section>
-
-<section class="section-tight">
-  <div class="container">
-    <div class="cta-banner">
-      <h2>Entering a team this summer?</h2>
-      <p class="lede mx-auto">Registration is open for all four divisions. Tell us about your squad and we'll follow up with schedules, fees, and next steps.</p>
-      <div class="cta-actions">
-        <a href="register.html" class="btn btn-white btn-lg">Register a Team</a>
-        <a href="tel:{PHONE_LINK}" class="btn btn-ghost btn-lg">{PHONE_DISPLAY}</a>
-      </div>
-    </div>
-  </div>
-</section>
 """
+    html += cta_banner(CTA_LABEL,
+                       f"Registration for {SEASON} opens soon. Tell us about your team and we'll take a look and follow up with divisions, dates and next steps.",
+                       f"tel:{PHONE_LINK}", PHONE_DISPLAY)
     html += footer()
     return html
 
@@ -346,15 +400,28 @@ write("index.html", page_home())
 # =========================================================
 # ABOUT
 # =========================================================
+def founder_card(img, name, bullets):
+    return f"""<article class="founder-card">
+        <img src="{img}" alt="{name} headshot" loading="lazy">
+        <div>
+          <div class="founder-head"><h3>{name}</h3><span class="role-pill">Co-Founder</span></div>
+          {ul(bullets, "founder-list")}
+        </div>
+      </article>"""
+
+
 def page_about():
-    html = head("About", f"About {CUP_NAME} — a summer soccer league built for high school boys' and girls' teams.")
+    html = head("About", f"Who we are: {SITE_NAME} was founded by brothers Andrew and Greg Kovacs to give high school players in {STATE} a real summer league.")
     html += header("about.html")
+    why_html = "\n      ".join(
+        f'<div class="feature"><div class="feature-icon">{ICON[ic]}</div><div><h3>{t}</h3><p>{d}</p></div></div>'
+        for ic, t, d in WHY)
     html += f"""
 <section class="page-hero">
   <div class="container">
     <p class="breadcrumb">About Us</p>
-    <h1>Built for high school players.</h1>
-    <p>{CUP_NAME} exists to fill the gap between school seasons with soccer worth showing up for.</p>
+    <h1>Who we are</h1>
+    <p>{SITE_NAME} is a newly formed organization built to give high school boys and girls a unique opportunity to compete over the summer.</p>
   </div>
 </section>
 
@@ -362,14 +429,40 @@ def page_about():
   <div class="container">
     <div class="split">
       <div class="split-media">
-        <img src="images/about.jpg" alt="{SITE_NAME} story" loading="lazy">
+        <img class="tall-photo" src="images/gallery/gallery-13.jpg" alt="Two St. John's players with family on the field on a fall day" loading="lazy">
       </div>
       <div>
         <p class="eyebrow">Our Story</p>
-        <h2>Why we started the {CUP_NAME}</h2>
-        <p>My brother and I started {SITE_NAME} because, like a lot of the players who'll fill these divisions, we loved playing for our high school team &mdash; and we missed it the second the fall season ended. We both went on to play in college, and we watched plenty of teammates go the club route too. That's real competition, and we don't take anything away from it. But none of it replaces playing for your school, with your own classmates on the sideline cheering you on. Nothing really does.</p>
-        <p>So we built the league we wished had existed: a summer season where high school players keep playing as a team, with real divisions, real officiating, and standings that actually matter &mdash; not a pickup run to kill time before preseason.</p>
-        <p>This summer starts local, but that's just the start. The plan is for the {CUP_NAME} to grow into a statewide cup, and eventually a New England&ndash;wide one &mdash; teams playing through the season in pools, then meeting at the end of summer for the {CUP_NAME} tournament, where the top teams from each pool play each other for the title. We're excited to be part of a bigger movement: bringing together high school teams that have never had a reason, or a chance, to play each other before.</p>
+        <h2>Why we started the {LEAGUE_NAME}</h2>
+        <p>My brother Greg and I started {SITE_NAME} because, like a lot of the players who'll fill these divisions, we loved playing for our high school team &mdash; and we missed it the second the fall season ended. We both went on to play in college, and we watched plenty of teammates go the club route too. That's real competition, and we don't take anything away from it. But none of it replaces playing for your school, with your own classmates on the sideline cheering you on.</p>
+        <p>So we built the league we wished had existed: a summer season where high school players keep playing as a team, with real divisions, real referees, and standings that actually matter &mdash; not a pickup run to kill time before preseason.</p>
+        <p>Our first season, {SEASON}, brings together high school teams from across {STATE}. Teams play the season in pools, then meet on the final weekend for the {CUP_NAME}, where the top teams from each pool play for the title. Over time we want to grow it across New England, bringing together high school teams that have never had a reason, or a chance, to play each other.</p>
+        <p class="signoff">&mdash; Andrew Kovacs, Co-Founder</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mission-band">
+  <div class="container narrow center">
+    <p class="eyebrow light">Our Mission</p>
+    <p class="mission-text">A high-quality summer league that builds stronger players, better teams, and a greater sense of connection to all competition.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="center stack">
+      <p class="eyebrow">The Founders</p>
+      <h2>Meet Andrew and Greg</h2>
+      <p class="lede mx-auto">Two brothers who have always had a passion for the beautiful game. After playing at the collegiate level, they're using {SITE_NAME} to pay it forward to the next generation of competitors.</p>
+    </div>
+    <div class="founders">
+      <div class="founders-photo">
+        <img src="images/gallery/gallery-14.jpg" alt="Andrew smiling with a leadership award plaque between two teammates, one holding a State Champions jacket" loading="lazy">
+      </div>
+      <div class="founders-cards">
+      {"".join(founder_card(*f) for f in FOUNDERS)}
       </div>
     </div>
   </div>
@@ -378,43 +471,19 @@ def page_about():
 <section class="band">
   <div class="container">
     <div class="center stack">
-      <p class="eyebrow">What We're About</p>
-      <h2>The standard we hold</h2>
+      <p class="eyebrow">Why the {LEAGUE_NAME}</p>
+      <h2>Why choose the {LEAGUE_NAME}</h2>
     </div>
-    <div class="grid grid-4">
-      <div class="feature">
-        <div class="feature-icon">{ICON['bolt']}</div>
-        <div><h3>Real Competition</h3><p>A full season and a playoff bracket &mdash; not a weekend jamboree.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">{ICON['users']}</div>
-        <div><h3>School Squads Welcome</h3><p>Enter as a school team or as a combined roster of high school players.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">{ICON['shield']}</div>
-        <div><h3>Safe &amp; Officiated</h3><p>Certified referees on every match, with clear conduct standards for players and sidelines.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">{ICON['ball']}</div>
-        <div><h3>Ready for Fall</h3><p>Competitive minutes all summer so players arrive at preseason sharp.</p></div>
-      </div>
+    <div class="grid grid-3">
+      {why_html}
     </div>
-  </div>
-</section>
-
-<section class="section-tight">
-  <div class="container">
-    <div class="cta-banner">
-      <h2>Want to get involved?</h2>
-      <p class="lede mx-auto">Entering a team, coaching, officiating, or sponsoring &mdash; we'd like to hear from you.</p>
-      <div class="cta-actions">
-        <a href="register.html" class="btn btn-white btn-lg">Register a Team</a>
-        <a href="contact.html" class="btn btn-ghost btn-lg">Contact Us</a>
-      </div>
-    </div>
+    <p class="center why-close">And the {CUP_NAME} to play for, with a champion crowned in every division.</p>
   </div>
 </section>
 """
+    html += cta_banner("Want a walkthrough?",
+                       "We're happy to set up a call or in-person meeting to answer any questions about the league.",
+                       "contact.html", "Contact Us")
     html += footer()
     return html
 
@@ -425,61 +494,65 @@ write("about.html", page_about())
 # =========================================================
 # DIVISIONS (programs.html)
 # =========================================================
-def division_table(rows):
+def division_table(prefix):
     trs = "\n".join(
-        f"<tr><td><strong>{a}</strong></td><td>{b}</td><td>{c}</td></tr>" for a, b, c in rows
+        f"<tr><td><strong>{prefix} {d}</strong></td><td>{lvl}</td><td>{MATCH_FORMAT}</td></tr>" for d, lvl in DIVISIONS
     )
     return f"""<div class="table-wrap"><table class="age-table">
-          <thead><tr><th>Division</th><th>Eligibility</th><th>Format</th></tr></thead>
+          <thead><tr><th>Division</th><th>Level</th><th>Format</th></tr></thead>
           <tbody>{trs}</tbody>
         </table></div>"""
 
 
 def page_programs():
-    html = head("Divisions", f"{CUP_NAME} divisions: boys' and girls' varsity and JV high school soccer, season format, and championship weekend.")
+    html = head("Divisions", f"{LEAGUE_NAME} divisions: Divisions 1, 2 and 3 for high school boys' and girls' teams in {STATE}, season format, and what's included.")
     html += header("programs.html")
+    steps = "\n      ".join(
+        f'<div class="step-card"><span class="step-num">{i}</span><h3>{t}</h3>{ul(items)}</div>'
+        for i, (t, items) in enumerate(SEASON_STEPS, 1))
+    stats = "".join(f'<div class="stat-tile"><strong>{n}</strong><span>{l}</span></div>' for n, l in INCLUDED_STATS)
     html += f"""
 <section class="page-hero">
   <div class="container">
     <p class="breadcrumb">Divisions</p>
-    <h1>Boys' &amp; Girls' High School Soccer</h1>
-    <p>Four divisions for athletes in grades 9&ndash;12, running a five-week season &mdash; two games a week, ten games total &mdash; with a championship weekend to close it out.</p>
+    <h1>Boys' &amp; Girls' Divisions</h1>
+    <p>Six divisions across {STATE}: Divisions 1, 2 and 3 for boys and for girls. Five weeks of pool play, then the {CUP_NAME}.</p>
   </div>
 </section>
 
 <section>
   <div class="container">
+    <div class="center stack intro-block">
+      <p class="eyebrow">What is the {LEAGUE_NAME}?</p>
+      <p class="lede mx-auto">{LEAGUE_ABOUT}</p>
+    </div>
+
     <div id="boys" class="league-block boys">
       <div class="league-head">
         <div>
           <span class="tag tag-boys">Boys</span>
-          <h2>Boys' High School Divisions</h2>
+          <h2>Boys' Divisions</h2>
         </div>
-        <a href="register.html" class="btn btn-primary btn-sm">Register a Boys' Team</a>
+        <a href="register.html" class="btn btn-primary btn-sm">{CTA_LABEL}</a>
       </div>
-      <p>Varsity and JV brackets for boys in grades 9&ndash;12. Teams may enter as a school squad or as a combined roster of high school players from the same area.</p>
+      <p>Divisions 1, 2 and 3 for boys' high school teams. Each division is split into pools for the regular season.</p>
       <div class="league-photo"><img src="images/gallery/gallery-4.jpg" alt="Boys high school soccer action" loading="lazy"></div>
-      {division_table([
-          ("Boys Varsity", "Grades 9&ndash;12", "11v11, full pitch, two 40-minute halves"),
-          ("Boys JV", "Grades 9&ndash;11", "11v11, full pitch, two 35-minute halves"),
-      ])}
+      {division_table("Boys")}
     </div>
 
     <div id="girls" class="league-block girls">
       <div class="league-head">
         <div>
           <span class="tag tag-girls">Girls</span>
-          <h2>Girls' High School Divisions</h2>
+          <h2>Girls' Divisions</h2>
         </div>
-        <a href="register.html" class="btn btn-primary btn-sm">Register a Girls' Team</a>
+        <a href="register.html" class="btn btn-primary btn-sm">{CTA_LABEL}</a>
       </div>
-      <p>The same structure for girls' teams &mdash; varsity and JV brackets, two games a week, and a place in the championship bracket at the end of the summer.</p>
+      <p>The same structure for girls' teams: Divisions 1, 2 and 3, each split into pools, with a place in the {CUP_NAME} bracket on the final weekend.</p>
       <div class="league-photo"><img src="images/gallery/gallery-5.jpg" alt="Girls high school soccer action" loading="lazy"></div>
-      {division_table([
-          ("Girls Varsity", "Grades 9&ndash;12", "11v11, full pitch, two 40-minute halves"),
-          ("Girls JV", "Grades 9&ndash;11", "11v11, full pitch, two 35-minute halves"),
-      ])}
+      {division_table("Girls")}
     </div>
+    <p class="center fine-print">Not sure where your team fits? Our league coordinators work with every team to find the right division.</p>
   </div>
 </section>
 
@@ -489,41 +562,49 @@ def page_programs():
       <p class="eyebrow">Season Format</p>
       <h2>How the summer runs</h2>
     </div>
-    <div class="grid grid-4">
-      <div class="feature">
-        <div class="feature-icon">{ICON['calendar']}</div>
-        <div><h3>Five Weeks</h3><p>A regular season across June and July &mdash; two matches a week per team, ten games total.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">{ICON['whistle']}</div>
-        <div><h3>Officiated Play</h3><p>Certified referees on every match, with results and standings published weekly.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">{ICON['users']}</div>
-        <div><h3>Roster Flexibility</h3><p>Squads of up to 22 players, all currently enrolled in grades 9&ndash;12.</p></div>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">{ICON['trophy']}</div>
-        <div><h3>Championship Weekend</h3><p>Every division plays a bracket in August &mdash; four champions, one Cup weekend.</p></div>
-      </div>
+    <div class="steps grid-4">
+      {steps}
     </div>
-    <p class="center fine-print">Exact dates, fields and fees are confirmed with each team at registration.</p>
+    <p class="center why-close">Six divisions. Six champions.</p>
   </div>
 </section>
 
-<section class="section-tight">
+<section>
   <div class="container">
-    <div class="cta-banner">
-      <h2>Registration is open for {SEASON}</h2>
-      <p class="lede mx-auto">Enter your team, ask about a division, or find out how to get a new squad started.</p>
-      <div class="cta-actions">
-        <a href="register.html" class="btn btn-white btn-lg">Register a Team</a>
-        <a href="mailto:{EMAIL}" class="btn btn-ghost btn-lg">{EMAIL}</a>
+    <div class="center stack">
+      <p class="eyebrow">What's Included</p>
+      <h2>What every team gets</h2>
+    </div>
+    <div class="stat-tiles">{stats}</div>
+    <div class="info-cards">
+      <div class="info-card wide">
+        <div class="info-head"><span class="feature-icon">{ICON['users']}</span><h3>Coaches and captains</h3></div>
+        {ul(["Each team has an adult coach who is the primary contact and helps keep team structure during league play. Because of high school soccer rules, coaches can be parents, graduated former players, and more.",
+             "Each team elects at least two captains to lead the team, on the field and off it.",
+             f"{SITE_NAME} works with the coach and captains all season to keep fields and players available."])}
+      </div>
+      <div class="info-card">
+        <div class="info-head"><span class="feature-icon">{ICON['clock']}</span><h3>Fields and times</h3></div>
+        {ul(["Two weekday games a week, between 4 and 9 p.m.",
+             f"Referees and scheduling handled by {SITE_NAME}",
+             "Game times set with coaches and referees around field availability",
+             "Specific fields and dates announced soon"])}
+      </div>
+      <div class="info-card">
+        <div class="info-head"><span class="feature-icon">{ICON['shield']}</span><h3>Dates and fees</h3></div>
+        {ul([f"First season in {SEASON}, across {STATE}",
+             f"Team pricing between {PRICE}",
+             "Up to 30 players per team",
+             "Strict league rules and full insurance for all play",
+             "Official registration will be announced shortly"])}
       </div>
     </div>
   </div>
 </section>
 """
+    html += cta_banner(f"Registration for {SEASON} opens soon",
+                       "Let us know you're interested and we'll reach out with divisions, dates and next steps before registration opens.",
+                       f"mailto:{EMAIL}", EMAIL)
     html += footer()
     return html
 
@@ -532,21 +613,23 @@ write("programs.html", page_programs())
 
 
 # =========================================================
-# REGISTER
+# INTEREST FORM (register.html — filename kept so existing links still work)
 # =========================================================
 FAQ = [
-    ("Who is eligible to play?",
-     "Any athlete currently enrolled in grades 9&ndash;12 for the upcoming school year. Teams can be school squads or combined rosters of high school players."),
-    ("Do we need to enter a full team?",
-     "Yes &mdash; the Cup is a team competition. If you have a partial roster, get in touch and we'll try to connect you with other players in your area."),
-    ("When does the season run?",
-     "The regular season runs five weeks through June and July &mdash; two games a week, ten games total &mdash; with championship weekend in August. Exact dates are confirmed with teams at registration."),
+    ("Is this the official registration?",
+     f"Not yet. This form tells us you're interested. Official registration for {SEASON} opens soon, and we'll reach out to everyone who filled this in first."),
+    ("Who can play?",
+     f"High school boys and girls in {STATE}. Teams can keep their school squad together over the summer or build a roster of high school players from the same area, up to 30 players."),
+    ("How do divisions work?",
+     "Boys and girls each have Divisions 1, 2 and 3: top-level competition, competitive play for rising teams, and development. Our league coordinators work with every team to find the right fit, and each division is split into pools."),
+    ("When is the season?",
+     f"The first season is {SEASON}: five weeks of pool play from July into August, two weekday games a week between 4 and 9 p.m., then the {CUP_NAME} knockout bracket on the final weekend. Specific fields and dates will be announced soon."),
     ("What does it cost?",
-     "Fees depend on division and field costs for the season. We'll send the current fee schedule when we follow up on your registration."),
-    ("Who coaches the teams?",
-     "Teams bring their own coach or team manager. If you're a coach looking for a squad, mention it in the form and we'll keep you in mind."),
-    ("Is registration final when I submit this form?",
-     "No. This form starts the process &mdash; we'll reply by email to confirm your division, dates, and fees before anything is locked in."),
+     f"Team pricing is between {PRICE}. Every game has a referee, and all play is fully insured."),
+    ("Who coaches the team?",
+     "Each team has an adult coach who is the primary contact. Because of high school soccer rules, coaches can be parents, graduated former players, and more. Each team also elects at least two captains."),
+    ("Can we talk it through first?",
+     f"Yes. We're happy to set up a call or in-person meeting. Email {EMAIL} or call {PHONE_DISPLAY}."),
 ]
 
 
@@ -560,53 +643,54 @@ def faq_block(items):
     return "\n      ".join(out)
 
 
+INVOLVED_STEPS = [
+    ("Reach out", "Fill in the form below, or get in touch, and we'll follow up."),
+    ("Tell your captains", "Let the captains on your team know about the league."),
+    ("Share their info", "If you can, send us your captains' contact information so we can reach them directly."),
+]
+
+
 def page_register():
-    html = head("Register a Team", f"Register a high school boys' or girls' team for the {SEASON} {CUP_NAME} soccer league.")
+    html = head("Interested in Participating?", f"Interested in the {LEAGUE_NAME}? Tell us about your high school team and we'll follow up before {SEASON} registration opens.")
     html += header("register.html")
+    steps = "\n      ".join(
+        f'<div class="step-card"><span class="step-num">{i}</span><h3>{t}</h3><p>{d}</p></div>'
+        for i, (t, d) in enumerate(INVOLVED_STEPS, 1))
     html += f"""
 <section class="page-hero">
   <div class="container">
-    <p class="breadcrumb">Registration</p>
-    <h1>Register Your Team</h1>
-    <p>Tell us about your squad and we'll follow up by email with divisions, dates, and fees. Nothing is locked in until we confirm with you.</p>
+    <p class="breadcrumb">Get Involved</p>
+    <h1>{CTA_LABEL}</h1>
+    <p>Official registration for {SEASON} opens soon. Tell us about your team and we'll take a look and follow up with divisions, dates and next steps.</p>
   </div>
 </section>
 
-<section>
+<section class="section-tight">
+  <div class="container">
+    <div class="steps grid-3">
+      {steps}
+    </div>
+  </div>
+</section>
+
+<section class="section-flush">
   <div class="container narrow">
     <form class="contact-form card-form" action="{FORM_ENDPOINT}" method="POST">
-{form_hidden(f"New {CUP_NAME} team registration")}      <div class="form-grid">
-        <div class="full">
-          <label for="team">Team or school name <span class="req">*</span></label>
-          <input id="team" name="Team or school" type="text" required autocomplete="organization">
+{form_hidden(f"New {LEAGUE_NAME} interest form")}      <div class="form-grid">
+        <div>
+          <label for="name">Your name <span class="req">*</span></label>
+          <input id="name" name="Name" type="text" required autocomplete="name">
         </div>
         <div>
-          <label for="division">Division <span class="req">*</span></label>
-          <select id="division" name="Division" required>
-            <option value="">Choose a division…</option>
-            <option>Boys Varsity</option>
-            <option>Boys JV</option>
-            <option>Girls Varsity</option>
-            <option>Girls JV</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div>
-          <label for="roster">Approximate roster size</label>
-          <input id="roster" name="Roster size" type="number" min="1" max="30" placeholder="e.g. 18">
-        </div>
-        <div>
-          <label for="name">Coach / contact name <span class="req">*</span></label>
-          <input id="name" name="Contact name" type="text" required autocomplete="name">
-        </div>
-        <div>
-          <label for="role">Your role</label>
-          <select id="role" name="Role">
+          <label for="role">Your role <span class="req">*</span></label>
+          <select id="role" name="Role" required>
+            <option value="">Choose one…</option>
             <option>Head coach</option>
             <option>Assistant coach</option>
-            <option>Team manager</option>
-            <option>Parent / guardian</option>
+            <option>Team captain</option>
             <option>Player</option>
+            <option>Parent / guardian</option>
+            <option>Athletic director</option>
             <option>Other</option>
           </select>
         </div>
@@ -618,17 +702,55 @@ def page_register():
           <label for="phone">Phone</label>
           <input id="phone" name="Phone" type="tel" autocomplete="tel">
         </div>
-        <div class="full">
-          <label for="town">Town / area</label>
+        <div>
+          <label for="team">School or team name <span class="req">*</span></label>
+          <input id="team" name="School or team" type="text" required autocomplete="organization">
+        </div>
+        <div>
+          <label for="town">Town</label>
           <input id="town" name="Town" type="text" placeholder="Where your team is based">
+        </div>
+        <div>
+          <label for="side">Boys or girls <span class="req">*</span></label>
+          <select id="side" name="Boys or girls" required>
+            <option value="">Choose one…</option>
+            <option>Boys</option>
+            <option>Girls</option>
+            <option>Both</option>
+          </select>
+        </div>
+        <div>
+          <label for="division">Division you're thinking of</label>
+          <select id="division" name="Division">
+            <option>Not sure yet, help us decide</option>
+            <option>Division 1: top-level competition</option>
+            <option>Division 2: competitive play for rising teams</option>
+            <option>Division 3: development and building experience</option>
+          </select>
+        </div>
+        <div>
+          <label for="roster">Approximate number of players</label>
+          <input id="roster" name="Roster size" type="number" min="1" max="30" placeholder="Up to 30">
+        </div>
+        <div>
+          <label for="call">Want a call or meeting?</label>
+          <select id="call" name="Walkthrough">
+            <option>No, email is fine</option>
+            <option>Yes, a phone or video call</option>
+            <option>Yes, an in-person meeting</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="captains">Captains' names and contact info</label>
+          <textarea id="captains" name="Captains" class="short" placeholder="If you can, list your captains with an email or phone number so we can reach them directly."></textarea>
         </div>
         <div class="full">
           <label for="message">Anything else we should know?</label>
-          <textarea id="message" name="Notes" placeholder="Scheduling constraints, questions about a division, whether you need help filling a roster…"></textarea>
+          <textarea id="message" name="Notes" class="short" placeholder="Questions, scheduling constraints, field access, how strong your team is…"></textarea>
         </div>
         <div class="full">
-          <button type="submit" class="btn btn-primary btn-lg">Submit Registration</button>
-          <p class="form-note">We'll reply to the email address above. Questions first? Call <a href="tel:{PHONE_LINK}">{PHONE_DISPLAY}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+          <button type="submit" class="btn btn-primary btn-lg">Send My Info</button>
+          <p class="form-note">This isn't a commitment. We'll reply to the email above. Questions first? Call <a href="tel:{PHONE_LINK}">{PHONE_DISPLAY}</a> or email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
           <div class="form-success"></div>
         </div>
       </div>
@@ -640,7 +762,7 @@ def page_register():
   <div class="container narrow">
     <div class="center stack">
       <p class="eyebrow">Questions</p>
-      <h2>Before you register</h2>
+      <h2>Common questions</h2>
     </div>
     <div class="faq">
       {faq_block(FAQ)}
@@ -659,14 +781,14 @@ write("register.html", page_register())
 # THANK YOU
 # =========================================================
 def page_thanks():
-    html = head("Thanks", "Your message has been received by Arrow Athletics.")
+    html = head("Thanks", f"Your message has been received by {SITE_NAME}.")
     html += header("")
     html += f"""
 <section class="page-hero tall">
   <div class="container">
     <div class="check-mark">{ICON['trophy']}</div>
     <h1>Got it &mdash; thank you.</h1>
-    <p>Your message is on its way to our inbox. We reply to most registrations and enquiries within a couple of days.</p>
+    <p>Your info is on its way to our inbox. We'll take a look and reply within a couple of days.</p>
     <div class="cta-actions center-actions">
       <a href="index.html" class="btn btn-white btn-lg">Back to Home</a>
       <a href="programs.html" class="btn btn-ghost btn-lg">See Divisions</a>
@@ -685,12 +807,19 @@ write("thanks.html", page_thanks())
 # =========================================================
 # PHOTOS
 # =========================================================
+# (number, filter category, tag css class, tag label, caption)
 GALLERY_ITEMS = [
+    (16, "boys", "boys", "Boys", "Taking on a defender"),
+    (17, "boys", "boys", "Boys", "Captain's armband on for the throw-in"),
+    (15, "matchday", "cup", "Matchday", "Senior night under the lights"),
+    (18, "boys", "boys", "Boys", "Pushing the ball up the field"),
+    (14, "founders", "coaches", "Founders", "Andrew with his leadership award"),
+    (13, "founders", "coaches", "Founders", "Family day on the field at St. John's"),
     (1, "boys", "boys", "Boys", "Lining up a shot on goal"),
-    (2, "boys", "boys", "Boys", "Team huddle before kickoff"),
     (3, "girls", "girls", "Girls", "Girls' soccer in full stride"),
-    (4, "boys", "boys", "Boys", "Racing for the ball down the wing"),
+    (2, "boys", "boys", "Boys", "Team huddle before kickoff"),
     (5, "girls", "girls", "Girls", "A throw-in from the sideline"),
+    (4, "boys", "boys", "Boys", "Racing for the ball down the wing"),
     (6, "boys", "boys", "Boys", "A squad ready for the season"),
     (7, "boys", "boys", "Boys", "Striking a first-time shot"),
     (8, "matchday", "cup", "Matchday", "Ready for kickoff"),
@@ -710,14 +839,14 @@ def gallery_item(n, category, tagcls, label, caption):
 
 
 def page_photos():
-    html = head("Photos", f"Photos from the {CUP_NAME} — boys' and girls' high school matches, matchdays, and championship weekend.")
+    html = head("Photos", f"Photos of high school boys' and girls' soccer from {SITE_NAME} and the {LEAGUE_NAME}.")
     html += header("photos.html")
     html += f"""
 <section class="page-hero">
   <div class="container">
     <p class="breadcrumb">Gallery</p>
-    <h1>Around the League</h1>
-    <p>Matchdays, league fixtures, and championship weekend across the boys' and girls' divisions.</p>
+    <h1>On the Field</h1>
+    <p>High school soccer across the boys' and girls' game, plus a look back at where our founders started.</p>
   </div>
 </section>
 
@@ -728,11 +857,12 @@ def page_photos():
       <button class="filter-btn" data-filter="boys">Boys</button>
       <button class="filter-btn" data-filter="girls">Girls</button>
       <button class="filter-btn" data-filter="matchday">Matchday</button>
+      <button class="filter-btn" data-filter="founders">Founders</button>
     </div>
     <div class="gallery-grid">
       {"".join(gallery_item(*item) for item in GALLERY_ITEMS)}
     </div>
-    <p class="center fine-print">More photography &mdash; including championship weekend &mdash; will be added as the {SEASON.lower()} season gets underway.</p>
+    <p class="center fine-print">League photos, including the {CUP_NAME}, will be added once the first season kicks off in {SEASON}.</p>
   </div>
 </section>
 {lightbox()}
@@ -745,55 +875,31 @@ write("photos.html", page_photos())
 
 
 # =========================================================
-# BLOG
+# NEWS (coming soon)
 # =========================================================
-BLOG_POSTS = [
-    {
-        "slug": "blog-registration-open.html",
-        "img": "images/blog/blog-1.jpg",
-        "cat": "news", "tag": "News",
-        "title": f"Registration Is Open for {SEASON}",
-        "date": f"June 1, {YEAR}",
-        "excerpt": "Boys' and girls' divisions are open for high school teams. Here's what coaches need to know before entering a squad.",
-    },
-    {
-        "slug": "blog-summer-prep.html",
-        "img": "images/blog/blog-2.jpg",
-        "cat": "tips", "tag": "Players",
-        "title": "Using the Summer Before Fall Tryouts",
-        "date": f"June 8, {YEAR}",
-        "excerpt": "Five ways high school players can turn a summer season into a stronger fall with their school team.",
-    },
-    {
-        "slug": "blog-coaches-guide.html",
-        "img": "images/blog/blog-3.jpg",
-        "cat": "coaches", "tag": "Coaches",
-        "title": "A Coach's Guide to Entering a Team",
-        "date": f"June 15, {YEAR}",
-        "excerpt": "Roster rules, scheduling, and what your program is signing up for when you enter the Cup.",
-    },
-]
-
-
 def page_blog():
-    html = head("News", f"News and updates from the {CUP_NAME} high school summer soccer league.")
+    html = head("News", f"News and updates from the {LEAGUE_NAME}, coming soon.")
     html += header("blog.html")
-    cards = "".join(
-        blog_card(p["slug"], p["img"], p["cat"], p["tag"], p["title"], p["excerpt"]) for p in BLOG_POSTS
-    )
     html += f"""
 <section class="page-hero">
   <div class="container">
     <p class="breadcrumb">News</p>
-    <h1>League News &amp; Updates</h1>
-    <p>Registration news, player guidance, and updates from around the {CUP_NAME}.</p>
+    <h1>League News</h1>
+    <p>Registration updates, schedules and results from the {LEAGUE_NAME}.</p>
   </div>
 </section>
 
 <section>
-  <div class="container">
-    <div class="grid grid-3">
-      {cards}
+  <div class="container narrow">
+    <div class="coming-soon">
+      <div class="feature-icon">{ICON['calendar']}</div>
+      <p class="eyebrow">Coming Soon</p>
+      <h2>News is on the way</h2>
+      <p>We'll post registration updates, field announcements, schedules and results here as {SEASON} gets closer. For now, follow along on Instagram.</p>
+      <div class="cta-actions">
+        <a href="{INSTAGRAM_URL}" class="btn btn-primary" target="_blank" rel="noopener">Follow @{INSTAGRAM_HANDLE}</a>
+        <a href="register.html" class="btn btn-navy">{CTA_LABEL}</a>
+      </div>
     </div>
   </div>
 </section>
@@ -805,117 +911,18 @@ def page_blog():
 write("blog.html", page_blog())
 
 
-def article(slug, img, cat, tag, title, date, body):
-    html = head(title, f"{title} — {CUP_NAME} news.")
-    html += header("blog.html")
-    body_html = "\n".join(
-        f"<h2>{p[1]}</h2>" if p[0] == "h2"
-        else f"<p>{p[1]}</p>" if p[0] == "p"
-        else ("<ul>" + "".join(f"<li>{li}</li>" for li in p[1]) + "</ul>")
-        for p in body
-    )
-    html += f"""
-<section class="article-hero">
-  <div class="container">
-    <a href="blog.html" class="back-link">&larr; All updates</a>
-    <span class="tag tag-{cat}">{tag}</span>
-    <h1>{title}</h1>
-    <p class="article-meta">{date}</p>
-  </div>
-  <div class="article-cover"><img src="{img}" alt="{title}"></div>
-</section>
-<section>
-  <div class="container">
-    <article class="article-body">
-      {body_html}
-      <div class="article-cta">
-        <h3>Ready to enter a team?</h3>
-        <p>Registration for {SEASON} is open for all four divisions.</p>
-        <a href="register.html" class="btn btn-primary">Register a Team</a>
-      </div>
-    </article>
-  </div>
-</section>
-"""
-    html += footer()
-    write(slug, html)
-
-
-article(
-    "blog-registration-open.html", "images/blog/blog-1.jpg", "news", "News",
-    f"Registration Is Open for {SEASON}", f"June 1, {YEAR}",
-    [
-        ("p", f"Registration for the {SEASON} {CUP_NAME} is open. Four divisions are running this summer &mdash; boys' varsity, boys' JV, girls' varsity and girls' JV &mdash; all for athletes in grades 9&ndash;12."),
-        ("h2", "What a team gets"),
-        ("p", "Every registered team plays a full five-week regular season &mdash; two games a week, ten games total &mdash; with officiated matches, published standings, and a place in the championship bracket in August."),
-        ("ul", [
-            "Two 11v11 fixtures a week through June and July",
-            "Certified referees on every match",
-            "Standings tracked and published through the season",
-            "A guaranteed spot in championship weekend",
-        ]),
-        ("h2", "Who can enter"),
-        ("p", "Teams can enter as a school squad or as a combined roster of high school players from the same area. Every player must be enrolled in grades 9&ndash;12 for the upcoming school year. Rosters can carry up to 22 players."),
-        ("h2", "How to register"),
-        ("p", "Fill out the registration form with your team name, division, and a contact for the coach or manager. We'll reply by email with the season schedule, field locations, and the current fee schedule before anything is confirmed."),
-        ("p", "Divisions are capped, so teams that register early get first choice of match slots."),
-    ],
-)
-
-article(
-    "blog-summer-prep.html", "images/blog/blog-2.jpg", "tips", "Players",
-    "Using the Summer Before Fall Tryouts", f"June 8, {YEAR}",
-    [
-        ("p", "A summer league is only as valuable as what you do with it. Here are five ways high school players get the most out of a season in the Cup before returning to their school team in the fall."),
-        ("h2", "1. Play a position you want to own"),
-        ("p", "Summer is the low-risk window to get real minutes somewhere new. If you want to move into midfield in the fall, this is the season to prove you can do it."),
-        ("h2", "2. Build the fitness base now"),
-        ("p", "Preseason is a brutal place to start getting fit. Players who arrive in August already carrying five weeks of twice-a-week match fitness spend preseason competing instead of surviving."),
-        ("h2", "3. Treat every match like it's scouted"),
-        ("p", "Your school coach hears about summer form &mdash; from you, from teammates, from other coaches in the area. Consistency across a season says more than one good game."),
-        ("h2", "4. Learn to lead"),
-        ("p", "Summer rosters mix players from different programs, which makes communication harder and more valuable. Players who organize a back line in July tend to wear the armband in October."),
-        ("h2", "5. Actually recover"),
-        ("p", "Two matches a week in summer heat is a real load. Hydration, sleep, and at least one genuine rest day a week are what keep a strong summer from turning into an injured fall."),
-    ],
-)
-
-article(
-    "blog-coaches-guide.html", "images/blog/blog-3.jpg", "coaches", "Coaches",
-    "A Coach's Guide to Entering a Team", f"June 15, {YEAR}",
-    [
-        ("p", "If you're considering entering a squad in the Cup this summer, here's what the commitment actually looks like."),
-        ("h2", "Rosters"),
-        ("p", "Squads carry up to 22 players, all enrolled in grades 9&ndash;12 for the coming school year. You can enter a full school team or build a combined roster from players across a town or region."),
-        ("h2", "The schedule"),
-        ("p", "Two matches a week per team across a five-week regular season &mdash; ten games total &mdash; then championship weekend in August. We work around the obvious summer conflicts &mdash; camps, vacations, and team commitments &mdash; where we can, so tell us about them at registration."),
-        ("h2", "What you're responsible for"),
-        ("ul", [
-            "Naming a coach or team manager as the league contact",
-            "Submitting a roster before the first fixture",
-            "Getting your squad to matches on time and ready to play",
-            "Sideline conduct &mdash; yours, your players', and your spectators'",
-        ]),
-        ("h2", "What we handle"),
-        ("p", "Scheduling, fields, certified officials, standings, and the championship bracket. You coach; we run the league."),
-        ("h2", "Coaches without a team"),
-        ("p", "If you want to coach but don't have a squad, get in touch anyway. We hear from players looking for teams every summer and we're happy to make the connection."),
-    ],
-)
-
-
 # =========================================================
 # CONTACT
 # =========================================================
 def page_contact():
-    html = head("Contact", f"Contact {CUP_NAME} — email {EMAIL} or call {PHONE_DISPLAY}.")
+    html = head("Contact", f"Contact {SITE_NAME}: email {EMAIL} or call {PHONE_DISPLAY}.")
     html += header("contact.html")
     html += f"""
 <section class="page-hero">
   <div class="container">
     <p class="breadcrumb">Contact</p>
     <h1>Get In Touch</h1>
-    <p>Questions about divisions, coaching, officiating or sponsorship &mdash; we're happy to talk.</p>
+    <p>Questions about divisions, coaching, refereeing or sponsorship? We're happy to talk, and we can set up a call or in-person meeting.</p>
   </div>
 </section>
 
@@ -938,22 +945,18 @@ def page_contact():
         </div>
         <div class="contact-row">
           <span class="ic">{ICON['clock']}</span>
-          <div><strong>Season</strong><span>{SEASON} &middot; registration open</span></div>
+          <div><strong>First season</strong><span>{SEASON} &middot; {STATE}</span></div>
         </div>
         <div class="contact-row">
           <span class="ic">{ICON['trophy']}</span>
-          <div><strong>Entering a team?</strong><a href="register.html">Use the registration form &rarr;</a></div>
-        </div>
-        <div class="social-row">
-          <a href="{INSTAGRAM_URL}" aria-label="Instagram" title="@{INSTAGRAM_HANDLE} on Instagram" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/></svg></a>
-          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 8.5h2V5h-2c-2.2 0-4 1.8-4 4v2H9v3.5h2V21h3.5v-6.5H17l.5-3.5h-3V9c0-.6.4-1 1-1z" fill="currentColor"/></svg></a>
+          <div><strong>{CTA_LABEL}</strong><a href="register.html">Fill out the interest form &rarr;</a></div>
         </div>
       </aside>
 
       <div>
         <h2>Send a Message</h2>
         <form class="contact-form" action="{FORM_ENDPOINT}" method="POST">
-{form_hidden(f"New {SITE_NAME} website enquiry")}          <div class="form-grid">
+{form_hidden(f"New {SITE_NAME} website message")}          <div class="form-grid">
             <div>
               <label for="cname">Name <span class="req">*</span></label>
               <input id="cname" name="Name" type="text" required autocomplete="name">
@@ -969,9 +972,10 @@ def page_contact():
             <div>
               <label for="ctopic">I'm asking about</label>
               <select id="ctopic" name="Topic">
-                <option>Entering a team</option>
+                <option>Joining the league</option>
+                <option>Setting up a call or meeting</option>
                 <option>Coaching</option>
-                <option>Refereeing / officials</option>
+                <option>Refereeing</option>
                 <option>Sponsorship</option>
                 <option>Something else</option>
               </select>
@@ -1002,14 +1006,14 @@ write("contact.html", page_contact())
 # MERCH
 # =========================================================
 def page_merch():
-    html = head("Merch", f"{SITE_NAME} team merch and custom jerseys — coming soon.")
+    html = head("Merch", f"{SITE_NAME} team merch and custom jerseys, coming soon.")
     html += header("merch.html")
     html += f"""
 <section class="page-hero">
   <div class="container">
     <p class="breadcrumb">Shop</p>
     <h1>Team Merch &amp; Jerseys</h1>
-    <p>Custom {SITE_NAME} jerseys for your squad &mdash; order forms open soon.</p>
+    <p>Custom {SITE_NAME} jerseys for your squad. Order forms open soon.</p>
   </div>
 </section>
 
@@ -1022,10 +1026,10 @@ def page_merch():
       <div>
         <p class="eyebrow">Coming Soon</p>
         <h2>Custom jerseys, made for your team</h2>
-        <p>We're setting up an online shop where every registered team can order custom {SITE_NAME} jerseys &mdash; your team name, your colors, your players' names and numbers &mdash; shipped straight to your door.</p>
-        <p>The shop isn't live yet, but it's coming before the season kicks off. Register your team or get in touch and we'll let you know the moment ordering opens.</p>
+        <p>We're setting up an online shop where every {LEAGUE_NAME} team can order custom {SITE_NAME} jerseys: your team name, your colors, and your players' names and numbers, shipped straight to your door.</p>
+        <p>The shop isn't live yet, but it's coming before the season kicks off. Tell us you're interested or get in touch and we'll let you know the moment ordering opens.</p>
         <div class="hero-actions">
-          <a href="register.html" class="btn btn-primary">Register a Team</a>
+          <a href="register.html" class="btn btn-primary">{CTA_LABEL}</a>
           <a href="contact.html" class="btn btn-navy">Get Notified</a>
         </div>
       </div>
@@ -1055,20 +1059,10 @@ def page_merch():
     </div>
   </div>
 </section>
-
-<section class="section-tight">
-  <div class="container">
-    <div class="cta-banner">
-      <h2>Want first access when the shop opens?</h2>
-      <p class="lede mx-auto">Register your team or send us a message and we'll reach out the moment jersey ordering goes live.</p>
-      <div class="cta-actions">
-        <a href="register.html" class="btn btn-white btn-lg">Register a Team</a>
-        <a href="contact.html" class="btn btn-ghost btn-lg">Contact Us</a>
-      </div>
-    </div>
-  </div>
-</section>
 """
+    html += cta_banner("Want first access when the shop opens?",
+                       "Tell us about your team or send us a message and we'll reach out the moment jersey ordering goes live.",
+                       "contact.html", "Contact Us")
     html += footer()
     return html
 
@@ -1080,7 +1074,7 @@ write("merch.html", page_merch())
 # 404
 # =========================================================
 def page_404():
-    html = head("Page Not Found", "That page doesn't exist — head back to Arrow Athletics.")
+    html = head("Page Not Found", f"That page doesn't exist. Head back to {SITE_NAME}.")
     html += header("")
     html += f"""
 <section class="page-hero tall">
@@ -1090,7 +1084,7 @@ def page_404():
     <p>The page you're after was moved, renamed, or never existed.</p>
     <div class="cta-actions center-actions">
       <a href="index.html" class="btn btn-white btn-lg">Back to Home</a>
-      <a href="register.html" class="btn btn-ghost btn-lg">Register a Team</a>
+      <a href="register.html" class="btn btn-ghost btn-lg">{CTA_LABEL}</a>
     </div>
   </div>
 </section>

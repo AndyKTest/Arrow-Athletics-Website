@@ -711,3 +711,112 @@ textarea { resize: vertical; min-height: 130px; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* =========================================================
+   v9 additions: founders, mission, season steps, what's included,
+   interest-form steps, news "coming soon"
+   ========================================================= */
+.section-flush { padding-top: 0; }
+.tall-photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; }
+.signoff { font-family: var(--font-head); font-weight: 600; color: var(--navy); margin-top: 6px; }
+
+.mission-band {
+  background: linear-gradient(115deg, var(--navy-deep) 10%, var(--navy) 60%, var(--navy-mid));
+  padding: 76px 0;
+}
+.mission-text {
+  font-family: var(--font-head);
+  font-size: clamp(1.5rem, 3.2vw, 2.3rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: #fff;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.founders { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 32px; align-items: stretch; }
+.founders-photo img {
+  width: 100%; height: 100%; min-height: 420px;
+  object-fit: cover; object-position: 50% 25%;
+  border-radius: var(--radius-lg); box-shadow: var(--shadow);
+}
+.founders-cards { display: grid; gap: 24px; }
+.founder-card {
+  display: grid; grid-template-columns: 150px 1fr; gap: 24px; align-items: start;
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 24px;
+}
+.founder-card img { width: 150px; height: 203px; object-fit: cover; border-radius: var(--radius-sm); }
+.founder-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 12px; }
+.founder-head h3 { margin: 0; font-size: 1.35rem; color: var(--navy); }
+.role-pill {
+  background: var(--blue); color: #fff; border-radius: 999px; padding: 4px 11px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.founder-list { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.95rem; }
+.founder-list li { margin-bottom: 6px; }
+@media (max-width: 900px) {
+  .founders { grid-template-columns: 1fr; }
+  .founders-photo img { min-height: 0; height: auto; aspect-ratio: 4 / 3; }
+}
+@media (max-width: 520px) {
+  .founder-card { grid-template-columns: 1fr; }
+  .founder-card img { width: 120px; height: 162px; }
+}
+
+.why-close { margin: 36px auto 0; font-weight: 600; color: var(--navy); font-size: 1.05rem; }
+.intro-block { margin-bottom: 48px; }
+
+.steps { display: grid; gap: 24px; }
+.step-card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 28px 26px;
+}
+.step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; margin-bottom: 16px; border-radius: 12px;
+  background: var(--blue); color: #fff;
+  font-family: var(--font-head); font-weight: 700; font-size: 1.25rem;
+}
+.step-card h3 { margin-bottom: 10px; color: var(--navy); }
+.step-card p { margin: 0; font-size: 0.95rem; }
+.step-card ul { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.95rem; }
+.step-card li { margin-bottom: 6px; }
+
+.stat-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 28px; }
+.stat-tile { background: var(--blue); color: #fff; border-radius: var(--radius); padding: 22px 24px; }
+.stat-tile strong {
+  display: block; font-family: var(--font-head); font-style: italic; font-weight: 800;
+  font-size: 2.6rem; line-height: 1; margin-bottom: 6px;
+}
+.stat-tile span { font-size: 0.92rem; font-weight: 600; color: rgba(255,255,255,0.86); }
+@media (max-width: 700px) { .stat-tiles { grid-template-columns: repeat(2, 1fr); } }
+
+.info-cards { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 24px; }
+.info-card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 26px;
+}
+.info-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.info-head h3 { margin: 0; color: var(--navy); }
+.info-card ul { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 0.95rem; }
+.info-card li { margin-bottom: 8px; }
+@media (max-width: 980px) { .info-cards { grid-template-columns: 1fr; } }
+
+.coming-soon {
+  text-align: center; background: var(--paper); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 56px 40px;
+}
+.coming-soon .feature-icon { width: 64px; height: 64px; margin: 0 auto 18px; }
+.coming-soon p { max-width: 52ch; margin-left: auto; margin-right: auto; }
+@media (max-width: 620px) { .coming-soon { padding: 40px 22px; } }
+
+textarea.short { min-height: 96px; }
+
+/* The longer "Interested in Participating?" button needs a little room in the nav */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .nav-links a { padding: 9px 10px; }
+  .nav-cta .btn-sm { padding-left: 14px; padding-right: 14px; }
+}
+.nowrap { white-space: nowrap; }
+@media (max-width: 620px) { .grid-4.tight { grid-template-columns: repeat(2, 1fr); } }
